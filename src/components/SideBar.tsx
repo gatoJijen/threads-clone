@@ -20,7 +20,6 @@ interface SideProps{
 }
 
 const SideBar:React.FC<SideProps> = ({activeT, activeS,activeH, activeP}) => {
-    const [prueba, setPrueba] = useState(false)
 
     return (
         <nav className="flex flex-col gap-4 items-center fixed justify-between bg-transparent h-svh w-[76px]">

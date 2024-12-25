@@ -5,7 +5,6 @@ import useActive from "@/hooks/useActive";
 import { useEffect, useState } from "react";
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const { isActive, notActiveH, notActiveP, notActiveS } = useActive()
   useEffect(() => {
 
     // Simula un retraso en la carga para este ejemplo
