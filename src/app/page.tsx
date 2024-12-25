@@ -5,14 +5,17 @@ import useActive from "@/hooks/useActive";
 import { useEffect, useState } from "react";
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const {isActive} = useActive()
+  const { isActive, notActiveH, notActiveP, notActiveS } = useActive()
   useEffect(() => {
+
     // Simula un retraso en la carga para este ejemplo
     const timer = setTimeout(() => {
       setIsLoading(false);
+      isActive()
+        console.log(isActive)
     }, 2000); // 2 segundos de "carga"
     return () => clearTimeout(timer);
-    isActive()
+
   }, []);
 
   return (
@@ -21,8 +24,7 @@ export default function Home() {
         <LoadingMain />
       ) : (
         <article>
-          <Main/>
-          <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+          <Main activeT={true} activeH={false} activeP={false} activeS={false}/>
         </article>
       )}
     </section>

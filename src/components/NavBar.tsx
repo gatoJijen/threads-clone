@@ -7,7 +7,7 @@ interface NavBarProps {
 const NavBar: React.FC<NavBarProps> = ({ title }) => {
     return (
 
-        <nav className="flex justify-between z-30 fixed px-4 items-center background-1 w-full py-2 h-14">
+        <nav className="flex justify-between z-30 fixed px-4 items-center background-1 w-full py-4 h-14">
             <picture className="hover:scale-[1.07] transition-all mt-[13px] ml-[5px]">
                 <button>
                     <svg aria-label="Threads" fill="white" height="34" role="img" viewBox="0 0 192 192" width="34" xmlns="http://www.w3.org/2000/svg">
@@ -17,11 +17,11 @@ const NavBar: React.FC<NavBarProps> = ({ title }) => {
                 </button>
 
             </picture>
-            <button className="ml-[69px] mt-[2px]">
+            <button className="ml-[91px] mt-[5px]">
                 <p className="text-white fs-1 font-semibold opacity-90">{title}</p>
             </button>
             <section>
-                <button className="w-[122.06px] h-[34px] hover:bg-opacity-90 bg-white rounded-lg text-black font-semibold text-lg fs-1">Iniciar sesión</button>
+                <button className="w-[122.06px] h-[34px] hover:bg-opacity-90 bg-white rounded-lg text-black mt-[25px] mr-2 font-semibold text-lg fs-1">Iniciar sesión</button>
             </section>
         </nav>
     )
