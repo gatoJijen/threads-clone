@@ -10,8 +10,6 @@ export default function Home() {
     // Simula un retraso en la carga para este ejemplo
     const timer = setTimeout(() => {
       setIsLoading(false);
-      isActive()
-        console.log(isActive)
     }, 2000); // 2 segundos de "carga"
     return () => clearTimeout(timer);
 
