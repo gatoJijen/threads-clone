@@ -10,7 +10,6 @@ import SearchActive from "@/app/public/SearchActive"
 import SearchInactive from "@/app/public/SearchInactive"
 import StickActive from "@/app/public/StickActive"
 import StickInactive from "@/app/public/StickInactive"
-import { useState } from "react"
 
 interface SideProps{
     activeT:boolean; 
