@@ -19,7 +19,7 @@ export default function Home() {
       {isLoading ? (
         <LoadingMain />
       ) : (
-        <article>
+        <article className="flex background-2 w-full h-svh">
           <Main activeT={true} activeH={false} activeP={false} activeS={false}/>
         </article>
       )}
