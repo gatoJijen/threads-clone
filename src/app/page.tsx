@@ -15,7 +15,7 @@ export default function Home() {
   }, []);
 
   return (
-    <section>
+    <main>
       {isLoading ? (
         <LoadingMain />
       ) : (
@@ -23,6 +23,6 @@ export default function Home() {
           <Main activeT={true} activeH={false} activeP={false} activeS={false}/>
         </article>
       )}
-    </section>
+    </main>
   );
 }
