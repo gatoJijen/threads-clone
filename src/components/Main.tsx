@@ -7,16 +7,17 @@ interface MainProps {
     activeS: boolean;
     activeH:boolean;
     activeP: boolean;
+    activeST: boolean;
 }
 
-const Main:React.FC<MainProps> =({activeT, activeS, activeH, activeP})=>{
+const Main:React.FC<MainProps> =({activeT, activeS, activeH, activeP, activeST})=>{
     return(
         <>  
             <header>
                 <NavBar title="Inicio"/>
             </header>
             <section className="flex w-full h-full items-center gap-8 justify-between">
-                <SideBar activeS={activeS} activeH={activeH} activeP={activeP} activeT={activeT}/>
+                <SideBar activeS={activeS} activeH={activeH} activeP={activeP} activeT={activeT} activeST={activeST}/>
                 <article className="w-full h-full mt-[118px] ml-[355px]">
                     <ContMain/>
                 </article>
