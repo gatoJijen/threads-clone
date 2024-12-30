@@ -1,5 +1,3 @@
-import ComentPost from '@/app/public/ComentPost'
-import HeartPost from '@/app/public/HeartPost'
 import Link from 'next/link'
 import React from 'react'
 import Social from './Social'
