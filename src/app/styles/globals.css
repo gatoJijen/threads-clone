@@ -37,3 +37,11 @@ body {
 .color-1 {
   color: rgb(119, 119, 119)
 }
+
+.color-2 {
+  color: rgb(204,204,204)
+}
+
+.transition-1 {
+  transition: all 0.20s cubic-bezier(0.48,0.08,1,0.06);
+}
