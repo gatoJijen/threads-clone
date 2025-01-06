@@ -49,6 +49,7 @@ export default function Web() {
         setIsLoading(false);
         
       }, 2000); // 2 segundos de "carga"
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       return () => {clearInterval(interval);unsubscribe(), clearTimeout(timer)}
   
     }, [router]);
