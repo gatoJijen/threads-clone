@@ -28,8 +28,7 @@ export default function Web() {
           // Usuario no autenticado: Redirige a login
           router.push("/login");
         }
-      });
-  
+      })
       // Verificación activa cada minuto
       const interval = setInterval(async () => {
         const user = auth.currentUser;
@@ -50,13 +49,13 @@ export default function Web() {
         setIsLoading(false);
         
       }, 2000); // 2 segundos de "carga"
-      return () => {clearTimeout(timer);clearInterval(interval);unsubscribe()}
+      return () => {clearInterval(interval);unsubscribe(), clearTimeout(timer)}
   
     }, [router]);
   
 
   return (
-    <main>
+    <section>
       {isLoading ? (
         <LoadingMain />
       ) : (
@@ -64,6 +63,6 @@ export default function Web() {
           <Main activeT={false} webH={false} webP={false} webS={false} webST={false} activeH={false} activeP={false} web={true} activeS={false} activeST={false} login={true}/>
         </article>
       )}
-    </main>
+    </section>
   );
 }

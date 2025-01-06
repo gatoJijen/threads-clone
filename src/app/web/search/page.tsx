@@ -2,12 +2,12 @@ import Main from "@/components/Main";
 
 const page = () => {
     return (
-        <main>
+        <section>
 
             <article className="flex background-2 w-full h-svh">
-                <Main activeT={false} activeH={false} webH={false} webP={false} webS={false} webST={false} activeP={false} web={false} activeS={true} activeST={false} login={false}/>
+                <Main activeT={false} activeH={false} webH={false} webP={false} webS={true} webST={false} activeP={false} web={false} activeS={false} activeST={false} login={true}/>
             </article>
-        </main>
+        </section>
     )
 }
 

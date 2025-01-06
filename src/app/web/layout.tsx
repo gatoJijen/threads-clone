@@ -24,13 +24,10 @@ export default function WebLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} background-2 antialiased`}
-      >
+    <section>
+      
         <SpeedInsights/>
         {children}
-      </body>
-    </html>
+    </section>
   );
 }
