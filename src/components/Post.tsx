@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import Social from './Social'
+import OptionsPost from '@/app/public/OptionsPost'
 
 interface PostProps {
     image: boolean
@@ -34,9 +35,9 @@ const Post: React.FC<PostProps> = ({ image }) => {
                         )}
                     </article>
                     </aside>
-                    <aside>
-                        <h1>options</h1>
-                    </aside>
+                    <button className='rounded-full w-8 h-8 bg-white bg-opacity-0 hover:bg-opacity-10 flex justify-center items-center'>
+                        <OptionsPost/>
+                    </button>
 
                 </section>
             </section>
