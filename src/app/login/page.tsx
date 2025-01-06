@@ -36,7 +36,9 @@ const Page: React.FC = () => {
                 console.log("Usuario registrado:", response.user);
                 router.push("/web"); // Redirige después de registrar
             }
-        } catch (err: any) {
+        }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any 
+        catch (err: any) {
             console.error("Error al registrar o iniciar sesión:", err.message);
             setError(err.message); // Establece el error si ocurre
         }
@@ -52,7 +54,9 @@ const Page: React.FC = () => {
             localStorage.setItem("authToken", token);
             localStorage.setItem("userEmail", user.email || "");
             router.push("/web");
-        } catch (err: any) {
+        } 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        catch (err: any) {
             console.error("Error al iniciar sesión:", err.message);
             setError(err.message); // Establece el error si ocurre
         }
@@ -83,7 +87,9 @@ const Page: React.FC = () => {
 
             console.log("Inicio de sesión con Google exitoso:", user);
             router.push("/web");
-        } catch (error: any) {
+        } 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        catch (error: any) {
             console.error("Error al iniciar sesión con Google:", error.message || error);
             setError(error.message || "Error desconocido al iniciar sesión con Google.");
         }
