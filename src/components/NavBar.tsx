@@ -38,9 +38,16 @@ const NavBar: React.FC<NavBarProps> = ({ title, login }) => {
                 <p className="text-white fs-1 font-semibold opacity-95">{title}</p>
             </button>
             <section>
-                <Link href={"/login"}>
-                    <button className={`w-[77.8px] h-[34px] ${login ? "opacity-0" : ""} hover:bg-opacity-90 bg-white rounded-xl text-black mt-[25px] mr-2 font-semibold text-lg fs-1`}>Entrar</button>
-                </Link>
+                {login?(
+                     <Link href={"/login"}>
+                     <button className={`w-[77.8px] h-[34px] opacity-0 hover:bg-opacity-90 bg-white rounded-xl text-black mt-[25px] mr-2 font-semibold text-lg fs-1`}>Entrar</button>
+                 </Link>
+                ):(<Link href={"/login"}>
+                    <button className={`w-[77.8px] h-[34px] opacity-100 hover:bg-opacity-90 bg-white rounded-xl text-black mt-[25px] mr-2 font-semibold text-lg fs-1`}>Entrar</button>
+                </Link>)
+
+                }
+                
 
             </section>
         </nav>

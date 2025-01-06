@@ -21,52 +21,52 @@ const Main:React.FC<MainProps> =({activeT,web, activeS,login, activeH,webH, acti
         <>  
             <header>
                 {activeT?(
-                    <NavBar login={false} title="Inicio"/>
+                    <NavBar login={login} title="Inicio"/>
                 ):(
                     <h1 className="opacity-0 hidden absolute"></h1>
                 )}
                 {activeS?(
-                    <NavBar login={false} title="Buscar"/>
+                    <NavBar login={login} title="Buscar"/>
                 ):(
                     <h1 className="opacity-0 hidden absolute"></h1>
                 )}
                 {activeH?(
-                    <NavBar login={false} title="Actividad"/>
+                    <NavBar login={login} title="Actividad"/>
                 ):(
                     <h1 className="opacity-0 hidden absolute"></h1>
                 )}
                 {activeP?(
-                    <NavBar login={false} title="Perfil"/>
+                    <NavBar login={login} title="Perfil"/>
                 ):(
                     <h1 className="opacity-0 hidden absolute"></h1>
                 )}
                 {activeST?(
-                    <NavBar login={false} title="Guardados"/>
+                    <NavBar login={login} title="Guardados"/>
                 ):(
                     <h1 className="opacity-0 hidden absolute"></h1>
                 )}
                 {web?(
-                    <NavBar login={true} title="Inicio"/>
+                    <NavBar login={login} title="Inicio"/>
                 ):(
                     <h1 className="opacity-0 hidden absolute"></h1>
                 )}
                 {webS?(
-                    <NavBar login={true} title="Buscar"/>
+                    <NavBar login={login} title="Buscar"/>
                 ):(
                     <h1 className="opacity-0 hidden absolute"></h1>
                 )}
                 {webH?(
-                    <NavBar login={true} title="Actividad"/>
+                    <NavBar login={login} title="Actividad"/>
                 ):(
                     <h1 className="opacity-0 hidden absolute"></h1>
                 )}
                 {webP?(
-                    <NavBar login={true} title="Perfil"/>
+                    <NavBar login={login} title="Perfil"/>
                 ):(
                     <h1 className="opacity-0 hidden absolute"></h1>
                 )}
                 {webST?(
-                    <NavBar login={true} title="Guardados"/>
+                    <NavBar login={login} title="Guardados"/>
                 ):(
                     <h1 className="opacity-0 hidden absolute"></h1>
                 )}
