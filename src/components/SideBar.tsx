@@ -13,7 +13,6 @@ import StickActive from "@/app/public/StickActive"
 import Link from "next/link"
 import { useState } from "react"
 import MoreMenu from "./MoreMenu"
-import { useRouter } from "next/navigation"
 
 interface SideProps {
     activeT: boolean;
