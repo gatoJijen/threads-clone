@@ -34,7 +34,7 @@ export default function Home() {
         <LoadingMain />
       ) : (
         <article className="flex background-2 w-full h-svh">
-          <Main activeT={false} activeH={false} web={true} webH={false} webP={false} webS={false} webST={false} activeP={false} activeS={false} activeST={false} login={true}/>
+          <Main activeT={false} activeH={false} web={true} webH={false} webP={false} webS={false} webST={false} activeP={false} activeS={false} activeST={false} login={false}/>
         </article>
       )}
     </main>
