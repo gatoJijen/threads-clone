@@ -13,6 +13,7 @@ import StickActive from "@/app/public/StickActive"
 import Link from "next/link"
 import { useState } from "react"
 import MoreMenu from "./MoreMenu"
+import LogueModal from "./LogueModal"
 
 interface SideProps {
     activeT: boolean;
@@ -30,12 +31,26 @@ interface SideProps {
 
 const SideBar: React.FC<SideProps> = ({ login, activeT, activeS, activeH, activeP, web, activeST, webH, webP, webS, webST }) => {
     const [abrir, setAbrir] = useState(false)
-    
+
     const change = () => {
         setAbrir((estadoActual) => !estadoActual); // Cambia el estado al opuesto
-      };
+    };
+    const [abrir2, setAbrir2] = useState(false)
+
+    const change2 = () => {
+        setAbrir2((estadoActual) => !estadoActual); // Cambia el estado al opuesto
+    };
     return (
         <nav className="flex flex-col items-center fixed justify-between bg-transparent h-svh w-[76px]">
+            {abrir2 ? (
+                <section className="w-[200vw] absolute h-svh">
+                    <section onClick={change2} className='bg-black flex z-[999999999999] justify-center items-center bg-opacity-80 w-full h-svh'>
+                        <LogueModal active={abrir2} />
+                    </section>
+                </section>
+            ) : (<div className="hidden absolute opacity-0"></div>)
+
+            }
             <section></section>
             <section className="flex flex-col w-full gap-4 mt-[68px] p-2">
                 <button className="bg-white bg-opacity-0  w-full flex justify-center items-center h-12 rounded-lg hover:bg-opacity-5">
@@ -78,29 +93,44 @@ const SideBar: React.FC<SideProps> = ({ login, activeT, activeS, activeH, active
                         )
                     )}
                 </button>
-                <button className="bg-white bg-opacity-5 flex justify-center items-center w-full rounded-lg h-12">
-                    <New />
-                </button>
-                <button className="bg-white bg-opacity-0 flex justify-center items-center w-full rounded-lg h-12 hover:bg-opacity-5">
+                <section className="bg-white bg-opacity-5 cursor-pointer flex justify-center items-center w-full rounded-lg h-12">
+                    {login?(<New />):(<section onClick={change2}><New/></section>)
+
+                    }
+                    
+                </section>
+                <section className="bg-white cursor-pointer bg-opacity-0 flex justify-center items-center w-full rounded-lg h-12 hover:bg-opacity-5">
                     {login ? (
                         webH ? (
-                            <HeartActive />
+                            <button>
+                                <HeartActive />
+                            </button>
+
                         ) : (
-                            <Link href={"/web/favoritos"}>
-                                <HeartInactive />
-                            </Link>
+                            <button>
+                                <Link href={"/web/favoritos"}>
+                                    <HeartInactive />
+                                </Link>
+                            </button>
+
                         )
                     ) : (
                         activeH ? (
-                            <HeartActive />
+                            <button>
+                                <HeartActive />
+                            </button>
+
                         ) : (
-                            <Link href={"/favoritos"}>
+                            <button onClick={change2}>
                                 <HeartInactive />
-                            </Link>
+                            </button>
+
                         )
                     )}
-                </button>
-                <button className="bg-white bg-opacity-0 flex justify-center items-center w-full rounded-lg h-12 hover:bg-opacity-5">
+
+                </section>
+
+                <button className="bg-white cursor-pointer bg-opacity-0 flex justify-center items-center w-full rounded-lg h-12 hover:bg-opacity-5">
                     {login ? (
                         webP ? (
                             <ProfileActive />
@@ -113,30 +143,36 @@ const SideBar: React.FC<SideProps> = ({ login, activeT, activeS, activeH, active
                         activeP ? (
                             <ProfileActive />
                         ) : (
-                            <Link href={"/perfil"}>
+                            <section onClick={change2}>
                                 <ProfileInactive />
-                            </Link>
+                            </section>
                         )
                     )}
                 </button>
             </section>
             <footer className="flex flex-col justify-center mb-[17px] gap-[10px] items-center w-full p-2">
                 <button className="bg-white bg-opacity-0 flex justify-center items-center w-full rounded-lg h-12 hover:bg-opacity-5 stc">
-                    {login || activeST || webST? (
-                        <StickActive />
-                    ) : (
-
-                        <StickActive />
-
-                    )}
+                    {login ?
+                        (webST ? (
+                            <StickActive />
+                        ) : (<StickActive />))
+                        : (activeST ? (
+                            <section onClick={change2}>
+                                <StickActive />
+                            </section>
+                        ) : (
+                            <section onClick={change2}>
+                                <StickActive />
+                            </section>
+                        ))}
                 </button>
-                <section onClick={()=>change()} className="stc cursor-pointer relative bg-transparent mr-[6px] flex justify-center items-center w-full rounded-lg h-12">
+                <section onClick={() => change()} className="stc cursor-pointer relative bg-transparent mr-[6px] flex justify-center items-center w-full rounded-lg h-12">
                     <More />
-                    <MoreMenu login={login} active={abrir}/>
-                    
+                    <MoreMenu login={login} active={abrir} />
+
                 </section>
             </footer>
-        </nav>
+        </nav >
     )
 }
 
