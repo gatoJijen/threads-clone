@@ -1,5 +1,5 @@
 
-import { auth, db, user } from '@/firebase/config';
+import { auth, db } from '@/firebase/config';
 import { addDoc, collection } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
@@ -12,6 +12,7 @@ interface NewModalProps {
 }
 
 const NewModal: React.FC<NewModalProps> = ({ close }) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [image, setImage] = useState(false)
     const [contenido, setContenido] = useState("")
     const add = async () => {
@@ -23,6 +24,7 @@ const NewModal: React.FC<NewModalProps> = ({ close }) => {
         });
         console.log("Document written with ID: ", docRef.id);
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [user, setUser] = useState<any>(null);
     const [displayName, setDisplayName] = useState("");
 

@@ -1,5 +1,4 @@
 "use client"
-import CamaraIco from '@/app/public/CamaraIco';
 import { auth } from '@/firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
 import Image from 'next/image';
@@ -8,6 +7,7 @@ import PerfilComplet from './PerfilComplet';
 import EditPerfilModal from './EditPerfilModal';
 
 const Perfil = () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any 
     const [user, setUser] = useState<any>(null);
     const [displayName, setDisplayName] = useState("");
 

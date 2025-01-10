@@ -8,6 +8,7 @@ interface EditPerfilModalProps {
 }
 
 const EditPerfilModal: React.FC<EditPerfilModalProps> = ({ close }) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any  
     const [user, setUser] = useState<any>(null);
     const [displayName, setDisplayName] = useState("");
 
