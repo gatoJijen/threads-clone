@@ -9,7 +9,7 @@ interface NavBarProps {
 const NavBar: React.FC<NavBarProps> = ({ title, login }) => {
     return (
 
-        <nav className="flex justify-between z-30 fixed px-4 items-center bg-transparent w-full py-4 h-14">
+        <nav className="flex justify-between fixed px-4 items-center bg-transparent w-full py-4 h-14">
             {login ? (
                 <Link className="mt-[15px] hover:scale-[1.07] transition-all  ml-[5px]" href={"/web"}>
                     <picture>

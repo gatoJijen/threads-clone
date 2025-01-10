@@ -1,6 +1,7 @@
 import React from 'react'
 import Search from './Search';
 import Post from './Post';
+import Perfil from './Perfil';
 
 interface ContMainProps {
   activeT: boolean;
@@ -34,7 +35,7 @@ const ContMain: React.FC<ContMainProps> = ({ activeH, activeP, web, activeS, act
         <h1 className='absolute opacity-0 hidden'></h1>
       )}
       {webP ? (
-        <h1>Perfil</h1>
+        <Perfil/>
       ) : (
         <h1 className='absolute opacity-0 hidden'></h1>
       )}
@@ -59,7 +60,7 @@ const ContMain: React.FC<ContMainProps> = ({ activeH, activeP, web, activeS, act
         <h1 className='absolute opacity-0 hidden'></h1>
       )}
       {activeP ? (
-        <h1>Perfil</h1>
+        <Perfil/>
       ) : (
         <h1 className='absolute opacity-0 hidden'></h1>
       )}

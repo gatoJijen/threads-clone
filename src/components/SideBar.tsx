@@ -14,6 +14,7 @@ import Link from "next/link"
 import { useState } from "react"
 import MoreMenu from "./MoreMenu"
 import LogueModal from "./LogueModal"
+import NewModal from "./NewModal"
 
 interface SideProps {
     activeT: boolean;
@@ -36,12 +37,23 @@ const SideBar: React.FC<SideProps> = ({ login, activeT, activeS, activeH, active
         setAbrir((estadoActual) => !estadoActual); // Cambia el estado al opuesto
     };
     const [abrir2, setAbrir2] = useState(false)
+    const [abrir3, setAbrir3] = useState(false)
+    
 
     const change2 = () => {
         setAbrir2((estadoActual) => !estadoActual); // Cambia el estado al opuesto
     };
+    const change3 = () => {
+        setAbrir3((estadoActual) => !estadoActual); // Cambia el estado al opuesto
+    };
+    
     return (
-        <nav className="flex flex-col items-center fixed justify-between bg-transparent h-svh w-[76px]">
+        <section className="flex flex-col items-center fixed justify-between bg-transparent h-svh w-[76px]">
+            {abrir ? (<section onClick={change} className='flex absolute bg-transparent z-[40] justify-center items-center w-[200vw] h-svh'>
+                
+            </section>) : (<MoreMenu login={login} active={abrir} />)
+
+            }
             {abrir2 ? (
                 <section className="w-[200vw] absolute h-svh">
                     <section onClick={change2} className='bg-black flex z-[999999999999] justify-center items-center bg-opacity-80 w-full h-svh'>
@@ -51,6 +63,16 @@ const SideBar: React.FC<SideProps> = ({ login, activeT, activeS, activeH, active
             ) : (<div className="hidden absolute opacity-0"></div>)
 
             }
+            {abrir3 ? (
+                <section className="w-[200vw] absolute h-svh">
+                    <section className='bg-black flex z-[999999999999] justify-center items-center bg-opacity-80 w-full h-svh'>
+                        <NewModal close={change3}/>
+                    </section>
+                </section>
+            ) : (<div className="hidden absolute opacity-0"></div>)
+
+            }
+            
             <section></section>
             <section className="flex flex-col w-full gap-4 mt-[68px] p-2">
                 <button className="bg-white bg-opacity-0  w-full flex justify-center items-center h-12 rounded-lg hover:bg-opacity-5">
@@ -94,10 +116,9 @@ const SideBar: React.FC<SideProps> = ({ login, activeT, activeS, activeH, active
                     )}
                 </button>
                 <section className="bg-white bg-opacity-5 cursor-pointer flex justify-center items-center w-full rounded-lg h-12">
-                    {login?(<New />):(<section onClick={change2}><New/></section>)
+                    {login ? (<button onClick={change3}><New /></button>) : (<button onClick={change2}><New /></button>)
 
                     }
-                    
                 </section>
                 <section className="bg-white cursor-pointer bg-opacity-0 flex justify-center items-center w-full rounded-lg h-12 hover:bg-opacity-5">
                     {login ? (
@@ -172,7 +193,7 @@ const SideBar: React.FC<SideProps> = ({ login, activeT, activeS, activeH, active
 
                 </section>
             </footer>
-        </nav >
+        </section >
     )
 }
 

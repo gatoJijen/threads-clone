@@ -9,8 +9,10 @@ export default function Home() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
+    
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-        
+
       if (user) {
         // Usuario autenticado
         router.push("/web");
@@ -23,7 +25,7 @@ export default function Home() {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000); // 2 segundos de "carga"
-    return () => {clearTimeout(timer);unsubscribe();}
+    return () => { clearTimeout(timer); unsubscribe(); }
 
   }, [router]);
 
@@ -34,7 +36,7 @@ export default function Home() {
         <LoadingMain />
       ) : (
         <article className="flex background-2 w-full h-svh">
-          <Main activeT={true} activeH={false} web={false} webH={false} webP={false} webS={false} webST={false} activeP={false} activeS={false} activeST={false} login={false}/>
+          <Main activeT={true} activeH={false} web={false} webH={false} webP={false} webS={false} webST={false} activeP={false} activeS={false} activeST={false} login={false} />
         </article>
       )}
     </main>

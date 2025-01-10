@@ -73,7 +73,7 @@ const Main:React.FC<MainProps> =({activeT,web, activeS,login, activeH,webH, acti
             </header>
             <section className="flex w-full h-full items-center gap-8 justify-between">
                 <SideBar web={web} login={login} webS={webS} webH={webH} webP={webP} webST={webST} activeS={activeS} activeH={activeH} activeP={activeP} activeT={activeT} activeST={activeST}/>
-                <article className="w-full h-full mt-[118px] ml-[355px]">
+                <article className="w-full background-2 h-full mt-[118px] ml-[355px]">
                     <ContMain web={web} webS={webS} webH={webH} webP={webP} webST={webST} activeS={activeS} activeH={activeH} activeP={activeP} activeT={activeT} activeST={activeST}/>
                 </article>
             </section>
