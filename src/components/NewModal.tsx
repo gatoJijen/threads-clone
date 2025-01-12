@@ -1,6 +1,5 @@
 
-import { auth, db } from '@/firebase/config';
-import { addDoc, collection } from 'firebase/firestore';
+import { auth } from '@/firebase/config';
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
 import { onAuthStateChanged, updateProfile } from 'firebase/auth';

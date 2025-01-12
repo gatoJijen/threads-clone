@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 
 const Page: React.FC = () => {
     /* eslint-disable @typescript-eslint/no-explicit-any */
+   
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [contraseña, setContraseña] = useState("");
@@ -116,8 +117,8 @@ const Page: React.FC = () => {
                 localStorage.setItem("userEmail", data.email);
 
                 // Redirige al usuario a la página principal
-                useRouter().push("/web");
-            } else {
+                router.push("/web");
+            } else {    
                 throw new Error(data.error || "Error desconocido");
             }
         } catch (error: any) {
