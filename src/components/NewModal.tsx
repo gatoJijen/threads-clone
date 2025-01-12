@@ -50,6 +50,27 @@ const NewModal: React.FC<NewModalProps> = ({ close }) => {
             }
         }
     };
+
+    const handlePostRequest = async () => {
+        try {
+          const response = await fetch("/api/router/Spost", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ displayName, contenido, image }),
+          });
+    
+          if (response.ok) {
+            const data = await response.json();
+            console.log("Mensaje guardado:", data);
+          } else {
+            console.error("Error en la API:", await response.json());
+          }
+        } catch (error) {
+          console.error("Error de red:", error);
+        }
+      }; 
     return (
         <article className='background-3 rounded-xl absolute top-[29%] right-[31.5vw]  flex flex-col items-start justify-between  gap-2 h-[226px] w-[620px] border border-white border-opacity-20'>
             <nav className='flex justify-between w-full border-b h-[56px] px-6 py-4 items-center border-b-white border-opacity-20'>
@@ -132,7 +153,8 @@ const NewModal: React.FC<NewModalProps> = ({ close }) => {
             
                 {contenido.length >= 1 && displayName.length >= 1 ? (
                     <section>
-                        <button onClick={() => { add(); close() }} className='rounded-xl border border-white text-white text-opacity-85 w-20 h-10 bg-transparent font-semibold border-opacity-60 flex justify-center items-center fs-1'>
+                        <button onClick={() => { //add();
+                            handlePostRequest(); close() }} className='rounded-xl border border-white text-white text-opacity-85 w-20 h-10 bg-transparent font-semibold border-opacity-60 flex justify-center items-center fs-1'>
                             Publicar
                         </button>
                     </section>

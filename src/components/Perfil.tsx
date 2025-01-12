@@ -72,7 +72,8 @@ const Perfil = () => {
                     Editar perfil
                 </button>
             </article>
-            <footer className='flex flex-col w-full gap-4 mt-6'>
+            {user?.photoURL && displayName.length >= 1?(<div className='hidden opacity-0 absolute'></div>)
+            :(<footer className='flex flex-col w-full gap-4 mt-6'>
                 <header>
                     <h2 className='text-white fs-1 font-semibold'>Finaliza tu perfil</h2>
                 </header>
@@ -93,7 +94,10 @@ const Perfil = () => {
                     }
                 </section>
 
-            </footer>
+            </footer>)
+
+            }
+            
         </section>
     )
 }

@@ -13,7 +13,14 @@ const MoreMenu: React.FC<MoreMenuProps> = ({ active, login }) => {
     const router = useRouter()
     const handleLogout = async () => {
         try {
+            // Cerrar sesión en Firebase
             await signOut(auth);
+    
+            // Limpiar los datos de autenticación en localStorage
+            localStorage.removeItem("authToken");
+            localStorage.removeItem("userEmail");
+    
+            // Redirigir a la página de inicio ("/")
             router.push("/");
         } catch (error) {
             console.error("Error al cerrar sesión:", error);

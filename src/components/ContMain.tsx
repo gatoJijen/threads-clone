@@ -20,7 +20,7 @@ const ContMain: React.FC<ContMainProps> = ({ activeH, activeP, web, activeS, act
   return (
     <section className='flex flex-col items-center rounded-3xl background-3 w-[640px] border border-white border-opacity-10 h-full'>
       {web ? (
-        <Post image={false} />
+        <h1 className='absolute opacity-0 hidden'></h1>
       ) : (
         <h1 className='absolute opacity-0 hidden'></h1>
       )}
@@ -45,7 +45,7 @@ const ContMain: React.FC<ContMainProps> = ({ activeH, activeP, web, activeS, act
         <h1 className='absolute opacity-0 hidden'></h1>
       )}
       {activeT ? (
-        <Post image={false} />
+        <h1 className='absolute opacity-0 hidden'></h1>
       ) : (
         <h1 className='absolute opacity-0 hidden'></h1>
       )}

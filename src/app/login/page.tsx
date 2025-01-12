@@ -5,115 +5,152 @@ import React, { useEffect, useState } from 'react';
 import ContinuarL from '../public/ContinuarL';
 import FooterAll from '@/components/FooterAll';
 import { auth, provider } from '@/firebase/config';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 
 const Page: React.FC = () => {
     const router = useRouter();
-    const [email, setEmail] = useState("");
-    const [contraseña, setContraseña] = useState("");
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false); // Estado para manejar la carga
+  const [email, setEmail] = useState("");
+  const [contraseña, setContraseña] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false); // Estado para manejar la carga
 
-    // Función para registrar un usuario
-    const register = async () => {
-        try {
-            if (email === "" || contraseña === "") {
-                throw new Error("Ambos campos deben estar completos.");
-            }
+  // Función para hacer peticiones POST de forma genérica
+  const handlePostRequest = async (url: string, data: object) => {
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-            // Verificar si el usuario ya está registrado
-            const existingUser = await signInWithEmailAndPassword(auth, email, contraseña)
-                .then(() => true) // Si se inicia sesión correctamente, el usuario ya existe
-                .catch(() => false); // Si falla, es porque el usuario no está registrado
+      if (response.ok) {
+        return await response.json(); // Devuelve los datos de la respuesta
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Error desconocido");
+      }
+    } catch (error: any) {
+      setError(error.message || "Error de red");
+      throw error; // Lanza el error para que se maneje en el nivel superior
+    }
+  };
 
-            if (existingUser) {
-                console.log("Usuario ya registrado, realizando login...");
-                await login(); // Si el usuario ya existe, hacer login
-            } else {
-                console.log("Registrando nuevo usuario...");
-                const response = await createUserWithEmailAndPassword(auth, email, contraseña);
-                console.log("Usuario registrado:", response.user);
-                router.push("/web"); // Redirige después de registrar
-            }
-        }
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any 
-        catch (err: any) {
-            console.error("Error al registrar o iniciar sesión:", err.message);
-            setError(err.message); // Establece el error si ocurre
-        }
-    };
+  // Función para registrar un usuario
+  const register = async () => {
+    try {
+      if (email === "" || contraseña === "") {
+        throw new Error("Ambos campos deben estar completos.");
+      }
 
-    // Función para iniciar sesión
-    const login = async () => {
-        try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, contraseña);
-            const user = userCredential.user;
-            console.log("Inicio de sesión exitoso:", user);
-            const token = await user.getIdToken();
-            localStorage.setItem("authToken", token);
-            localStorage.setItem("userEmail", user.email || "");
-            router.push("/web");
-        } 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        catch (err: any) {
-            console.error("Error al iniciar sesión:", err.message);
-            setError(err.message); // Establece el error si ocurre
-        }
-    };
+      // Verificar si el usuario ya está registrado
+      const existingUser = await handlePostRequest("/api/router/login", { email, contraseña })
+        .then(() => true) // Si se inicia sesión correctamente, el usuario ya existe
+        .catch(() => false); // Si falla, es porque el usuario no está registrado
 
-    // Maneja el envío del formulario
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setError(""); // Limpiar errores
-        setLoading(true); // Activar estado de carga
-        await register(); // Llama a la función de registro o login según corresponda
-        setLoading(false); // Desactivar estado de carga después de completar
-    };
+      if (existingUser) {
+        console.log("Usuario ya registrado, realizando login...");
+        await login(); // Si el usuario ya existe, hacer login
+      } else {
+        console.log("Registrando nuevo usuario...");
+        await handlePostRequest("/api/router/register", { email, contraseña }); // Registra el nuevo usuario
+        router.push("/web"); // Redirige después de registrar
+      }
+    } catch (err: any) {
+      console.error("Error al registrar o iniciar sesión:", err.message);
+      setError(err.message); // Establece el error si ocurre
+    }
+  };
 
-    // Función para manejar login con Google
-    const googleRegister = async () => {
-        try {
-            const result = await signInWithPopup(auth, provider);
-            const user = result.user;
+  // Función para iniciar sesión
+  const login = async () => {
+    try {
+      const userCredential = await handlePostRequest("/api/router/login", { email, contraseña });
 
-            if (!user) {
-                throw new Error("No se pudo obtener el usuario.");
-            }
+      // Obtén el usuario y el token de la respuesta
+      const { user, token } = userCredential;
 
-            const token = await user.getIdToken();
-            localStorage.setItem("authToken", token);
-            localStorage.setItem("userEmail", user.email || "");
+      console.log("Inicio de sesión exitoso:", user);
 
-            console.log("Inicio de sesión con Google exitoso:", user);
-            router.push("/web");
-        } 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        catch (error: any) {
-            console.error("Error al iniciar sesión con Google:", error.message || error);
-            setError(error.message || "Error desconocido al iniciar sesión con Google.");
-        }
-    };
+      // Guarda el token y el email en el localStorage
+      localStorage.setItem("authToken", token);
+      localStorage.setItem("userEmail", user.email || "");
 
-    
-        useEffect(() => {
-      
-      
-            const unsubscribe = onAuthStateChanged(auth, (user) => {
-                
-                if (user) {
-                  // Usuario autenticado
-                  router.push("/web");
-                } else {
-                  // Usuario no autenticado
-                  router.push("/login");
-                }
-              });
-          return () => unsubscribe(); // Limpia el listener al desmontar
-        }, [router]);
+      // Redirige a la página principal
+      router.push("/web");
+    } catch (err: any) {
+      console.error("Error al iniciar sesión:", err.message);
+      setError(err.message); // Establece el error si ocurre
+    }
+  };
+
+  // Función para manejar login con Google
+  const googleRegister = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+  
+      if (!user) {
+        throw new Error("No se pudo obtener el usuario.");
+      }
+  
+      const token = await user.getIdToken();
+  
+      // Enviar el token a la API para el backend
+      const res = await fetch("/api/auth/google", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token }),
+      });
+  
+      const data = await res.json();
+  
+      if (data.success) {
+        // Guarda el token y otros datos en el localStorage
+        localStorage.setItem("authToken", data.token);
+        localStorage.setItem("userEmail", data.email);
+  
+        // Redirige al usuario a la página principal
+        useRouter().push("/web");
+      } else {
+        throw new Error(data.error || "Error desconocido");
+      }
+    } catch (error: any) {
+      console.error("Error al iniciar sesión con Google:", error.message || error);
+    }
+  };
+
+  // Maneja el envío del formulario
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(""); // Limpiar errores
+    setLoading(true); // Activar estado de carga
+    await register(); // Llama a la función de registro o login según corresponda
+    setLoading(false); // Desactivar estado de carga después de completar
+  };
+
+  // Efecto para manejar el estado de autenticación
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // Usuario autenticado
+        router.push("/web");
+      } else {
+        // Usuario no autenticado
+        router.push("/login");
+      }
+    });
+
+    // Limpia el listener al desmontar
+    return () => unsubscribe();
+  }, [router]);
 
     return (
-        <section className='z-[99] background-1 absolute w-full h-svh'>
+        <section className='z-[99] background-1 absolute w-full h-full'>
             <header className='absolute h-full w-full z-[99]'>
                 <nav className='w-full relative h-full overflow-hidden cursor-default'>
                     <picture className='absolute top-[-145px] w-full scale-[130%] pointer-events-none'>

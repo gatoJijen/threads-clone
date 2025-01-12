@@ -7,27 +7,45 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 export default function Home() {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true); // Estado para indicar que estamos cargando
+
   useEffect(() => {
-    
+    // Primero, comprueba si ya existe un token de autenticación en localStorage
+    const authToken = localStorage.getItem("authToken");
 
+    if (authToken) {
+      // Si hay un token de autenticación, redirige al usuario a /web
+      router.push("/web");
+      return;
+    }
+
+    // Si no hay token, observa el estado de autenticación con Firebase
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-
       if (user) {
-        // Usuario autenticado
-        router.push("/web");
+        // Si el usuario está autenticado, guarda el token y el email en localStorage
+        user.getIdToken().then((token) => {
+          localStorage.setItem("authToken", token);
+          localStorage.setItem("userEmail", user.email || "");
+          router.push("/web");
+        });
       } else {
-        // Usuario no autenticado
+        // Si el usuario no está autenticado, redirige a /login
         router.push("/");
       }
     });
+
+
     // Simula un retraso en la carga para este ejemplo
     const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000); // 2 segundos de "carga"
-    return () => { clearTimeout(timer); unsubscribe(); }
+      setIsLoading(false); // Cambia el estado de carga después de 2 segundos
+    }, 2000);
 
-  }, [router]);
+    // Limpia el temporizador y el listener cuando el componente se desmonte
+    return () => {
+      clearTimeout(timer);
+      unsubscribe()
+    };
+  }, [router, isLoading]);
 
 
   return (
