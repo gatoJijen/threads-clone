@@ -9,146 +9,147 @@ import { onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 
 const Page: React.FC = () => {
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [contraseña, setContraseña] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); // Estado para manejar la carga
+    const [email, setEmail] = useState("");
+    const [contraseña, setContraseña] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false); // Estado para manejar la carga
 
-  // Función para hacer peticiones POST de forma genérica
-  const handlePostRequest = async (url: string, data: object) => {
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+    // Función para hacer peticiones POST de forma genérica
+    const handlePostRequest = async (url: string, data: object) => {
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
 
-      if (response.ok) {
-        return await response.json(); // Devuelve los datos de la respuesta
-      } else {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Error desconocido");
-      }
-    } catch (error: any) {
-      setError(error.message || "Error de red");
-      throw error; // Lanza el error para que se maneje en el nivel superior
-    }
-  };
+            if (response.ok) {
+                return await response.json(); // Devuelve los datos de la respuesta
+            } else {
+                const errorData = await response.json();
+                throw new Error(errorData.error || "Error desconocido");
+            }
+        } catch (error: any) {
+            setError(error.message || "Error de red");
+            throw error; // Lanza el error para que se maneje en el nivel superior
+        }
+    };
 
-  // Función para registrar un usuario
-  const register = async () => {
-    try {
-      if (email === "" || contraseña === "") {
-        throw new Error("Ambos campos deben estar completos.");
-      }
+    // Función para registrar un usuario
+    const register = async () => {
+        try {
+            if (email === "" || contraseña === "") {
+                throw new Error("Ambos campos deben estar completos.");
+            }
 
-      // Verificar si el usuario ya está registrado
-      const existingUser = await handlePostRequest("/api/router/login", { email, contraseña })
-        .then(() => true) // Si se inicia sesión correctamente, el usuario ya existe
-        .catch(() => false); // Si falla, es porque el usuario no está registrado
+            // Verificar si el usuario ya está registrado
+            const existingUser = await handlePostRequest("/api/router/login", { email, contraseña })
+                .then(() => true) // Si se inicia sesión correctamente, el usuario ya existe
+                .catch(() => false); // Si falla, es porque el usuario no está registrado
 
-      if (existingUser) {
-        console.log("Usuario ya registrado, realizando login...");
-        await login(); // Si el usuario ya existe, hacer login
-      } else {
-        console.log("Registrando nuevo usuario...");
-        await handlePostRequest("/api/router/register", { email, contraseña }); // Registra el nuevo usuario
-        router.push("/web"); // Redirige después de registrar
-      }
-    } catch (err: any) {
-      console.error("Error al registrar o iniciar sesión:", err.message);
-      setError(err.message); // Establece el error si ocurre
-    }
-  };
+            if (existingUser) {
+                console.log("Usuario ya registrado, realizando login...");
+                await login(); // Si el usuario ya existe, hacer login
+            } else {
+                console.log("Registrando nuevo usuario...");
+                await handlePostRequest("/api/router/register", { email, contraseña }); // Registra el nuevo usuario
+                router.push("/web"); // Redirige después de registrar
+            }
+        } catch (err: any) {
+            console.error("Error al registrar o iniciar sesión:", err.message);
+            setError(err.message); // Establece el error si ocurre
+        }
+    };
 
-  // Función para iniciar sesión
-  const login = async () => {
-    try {
-      const userCredential = await handlePostRequest("/api/router/login", { email, contraseña });
+    // Función para iniciar sesión
+    const login = async () => {
+        try {
+            const userCredential = await handlePostRequest("/api/router/login", { email, contraseña });
 
-      // Obtén el usuario y el token de la respuesta
-      const { user, token } = userCredential;
+            // Obtén el usuario y el token de la respuesta
+            const { user, token } = userCredential;
 
-      console.log("Inicio de sesión exitoso:", user);
+            console.log("Inicio de sesión exitoso:", user);
 
-      // Guarda el token y el email en el localStorage
-      localStorage.setItem("authToken", token);
-      localStorage.setItem("userEmail", user.email || "");
+            // Guarda el token y el email en el localStorage
+            localStorage.setItem("authToken", token);
+            localStorage.setItem("userEmail", user.email || "");
 
-      // Redirige a la página principal
-      router.push("/web");
-    } catch (err: any) {
-      console.error("Error al iniciar sesión:", err.message);
-      setError(err.message); // Establece el error si ocurre
-    }
-  };
+            // Redirige a la página principal
+            router.push("/web");
+        } catch (err: any) {
+            console.error("Error al iniciar sesión:", err.message);
+            setError(err.message); // Establece el error si ocurre
+        }
+    };
 
-  // Función para manejar login con Google
-  const googleRegister = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-  
-      if (!user) {
-        throw new Error("No se pudo obtener el usuario.");
-      }
-  
-      const token = await user.getIdToken();
-  
-      // Enviar el token a la API para el backend
-      const res = await fetch("/api/auth/google", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ token }),
-      });
-  
-      const data = await res.json();
-  
-      if (data.success) {
-        // Guarda el token y otros datos en el localStorage
-        localStorage.setItem("authToken", data.token);
-        localStorage.setItem("userEmail", data.email);
-  
-        // Redirige al usuario a la página principal
-        useRouter().push("/web");
-      } else {
-        throw new Error(data.error || "Error desconocido");
-      }
-    } catch (error: any) {
-      console.error("Error al iniciar sesión con Google:", error.message || error);
-    }
-  };
+    // Función para manejar login con Google
+    const googleRegister = async () => {
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
 
-  // Maneja el envío del formulario
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(""); // Limpiar errores
-    setLoading(true); // Activar estado de carga
-    await register(); // Llama a la función de registro o login según corresponda
-    setLoading(false); // Desactivar estado de carga después de completar
-  };
+            if (!user) {
+                throw new Error("No se pudo obtener el usuario.");
+            }
 
-  // Efecto para manejar el estado de autenticación
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // Usuario autenticado
-        router.push("/web");
-      } else {
-        // Usuario no autenticado
-        router.push("/login");
-      }
-    });
+            const token = await user.getIdToken();
 
-    // Limpia el listener al desmontar
-    return () => unsubscribe();
-  }, [router]);
+            // Enviar el token a la API para el backend
+            const res = await fetch("/api/auth/google", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ token }),
+            });
 
+            const data = await res.json();
+
+            if (data.success) {
+                // Guarda el token y otros datos en el localStorage
+                localStorage.setItem("authToken", data.token);
+                localStorage.setItem("userEmail", data.email);
+
+                // Redirige al usuario a la página principal
+                useRouter().push("/web");
+            } else {
+                throw new Error(data.error || "Error desconocido");
+            }
+        } catch (error: any) {
+            console.error("Error al iniciar sesión con Google:", error.message || error);
+        }
+    };
+
+    // Maneja el envío del formulario
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setError(""); // Limpiar errores
+        setLoading(true); // Activar estado de carga
+        await register(); // Llama a la función de registro o login según corresponda
+        setLoading(false); // Desactivar estado de carga después de completar
+    };
+
+    // Efecto para manejar el estado de autenticación
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Usuario autenticado
+                router.push("/web");
+            } else {
+                // Usuario no autenticado
+                router.push("/login");
+            }
+        });
+
+        // Limpia el listener al desmontar
+        return () => unsubscribe();
+    }, [router]);
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     return (
         <section className='z-[99] background-1 absolute w-full h-full'>
             <header className='absolute h-full w-full z-[99]'>

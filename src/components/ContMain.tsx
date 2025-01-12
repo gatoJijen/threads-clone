@@ -1,6 +1,5 @@
 import React from 'react'
 import Search from './Search';
-import Post from './Post';
 import Perfil from './Perfil';
 
 interface ContMainProps {

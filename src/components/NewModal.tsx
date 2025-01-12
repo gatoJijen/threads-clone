@@ -15,15 +15,6 @@ const NewModal: React.FC<NewModalProps> = ({ close }) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [image, setImage] = useState(false)
     const [contenido, setContenido] = useState("")
-    const add = async () => {
-        // Add a new document with a generated id.
-        const docRef = await addDoc(collection(db, "post"), {
-            foto: user.photoURL,
-            nombre: displayName,
-            contenido: contenido,
-        });
-        console.log("Document written with ID: ", docRef.id);
-    }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [user, setUser] = useState<any>(null);
     const [displayName, setDisplayName] = useState("");
