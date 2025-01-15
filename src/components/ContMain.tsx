@@ -39,7 +39,7 @@ const ContMain: React.FC<ContMainProps> = ({ activeH, activeP, web, activeS, act
       collection(db, "post"), // Cambia "messages" por el nombre de tu colección
       (snapshot) => {
         const updatedMessages = snapshot.docs.map((doc) => ({
-          id: doc.id
+          id: doc.id,
           ...doc.data(),
         })) as Message[];
         setMessages(updatedMessages);
