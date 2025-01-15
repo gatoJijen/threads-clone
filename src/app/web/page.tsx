@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 export default function Web() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false); // Estado para indicar que estamos cargando
-
+  
   useEffect(() => {
     // Primero, comprueba si ya existe un token de autenticación en localStorage
     const authToken = localStorage.getItem("authToken");

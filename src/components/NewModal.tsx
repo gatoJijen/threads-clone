@@ -7,17 +7,22 @@ import Borradores from '@/app/public/Borradores';
 import NewPostOption from '@/app/public/NewPostOption';
 
 interface NewModalProps {
-    close: () => void
+    close: () => void;
+    p1: boolean
 }
 
-const NewModal: React.FC<NewModalProps> = ({ close }) => {
+const NewModal: React.FC<NewModalProps> = ({ close, p1 }) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [image, setImage] = useState(false)
     const [contenido, setContenido] = useState("")
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [user, setUser] = useState<any>(null);
     const [displayName, setDisplayName] = useState("");
-
+    let url = user?.photoURL ? user.photoURL : "https://www.instagram.com/static/images/text_app/profile_picture/profile_pic.png/72f3228a91ee.png"
+    let like = 0
+    let comment = 0
+    let rePost = 0
+    let share = 0
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
@@ -43,26 +48,26 @@ const NewModal: React.FC<NewModalProps> = ({ close }) => {
 
     const handlePostRequest = async () => {
         try {
-          const response = await fetch("/api/router/Spost", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ displayName, contenido, image }),
-          });
-    
-          if (response.ok) {
-            const data = await response.json();
-            console.log("Mensaje guardado:", data);
-          } else {
-            console.error("Error en la API:", await response.json());
-          }
+            const response = await fetch("/api/router/Spost", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ displayName, contenido, url, rePost, comment, like, share }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Mensaje guardado:", data);
+            } else {
+                console.error("Error en la API:", await response.json());
+            }
         } catch (error) {
-          console.error("Error de red:", error);
+            console.error("Error de red:", error);
         }
-      }; 
+    };
     return (
-        <article className='background-3 rounded-xl absolute top-[29%] right-[31.5vw]  flex flex-col items-start justify-between  gap-2 h-[226px] w-[620px] border border-white border-opacity-20'>
+        <article className={`background-3 rounded-xl absolute top-[30%]  ${p1 ? "right-[31.5vw]" : "right[100vw]"}  flex flex-col items-start justify-between  gap-2 h-[226px] w-[620px] border border-white border-opacity-20 z-50`}>
             <nav className='flex justify-between w-full border-b h-[56px] px-6 py-4 items-center border-b-white border-opacity-20'>
                 <button onClick={close}>
                     <p>Cancelar</p>
@@ -71,8 +76,8 @@ const NewModal: React.FC<NewModalProps> = ({ close }) => {
                     <p className='text-white font-semibold text-opacity-85 text-base'>Nuevo hilo</p>
                 </section>
                 <section className='flex gap-4'>
-                    <button><Borradores/></button>
-                    <button><NewPostOption/></button>
+                    <button><Borradores /></button>
+                    <button><NewPostOption /></button>
                 </section>
             </nav>
             <section className='flex w-full gap-2 px-6'>
@@ -140,11 +145,12 @@ const NewModal: React.FC<NewModalProps> = ({ close }) => {
             </section>
 
             <footer className='flex mb-3 justify-end ml-20 w-10/12 gap-2'>
-            
+
                 {contenido.length >= 1 && displayName.length >= 1 ? (
                     <section>
                         <button onClick={() => { //add();
-                            handlePostRequest(); close() }} className='rounded-xl border border-white text-white text-opacity-85 w-20 h-10 bg-transparent font-semibold border-opacity-60 flex justify-center items-center fs-1'>
+                            handlePostRequest(); close()
+                        }} className='rounded-xl border border-white text-white text-opacity-85 w-20 h-10 bg-transparent font-semibold border-opacity-60 flex justify-center items-center fs-1'>
                             Publicar
                         </button>
                     </section>

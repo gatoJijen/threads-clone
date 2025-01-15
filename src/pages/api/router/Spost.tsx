@@ -5,7 +5,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     try {
-      const { displayName, contenido, image } = req.body;
+      const { displayName, contenido, url, like, comment,rePost,share } = req.body;
 
       // Validar que los campos obligatorios estén presentes
       if (!displayName || !contenido) {
@@ -16,7 +16,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const docRef = await addDoc(collection(db, "post"), {
         displayName,
         contenido,
-        image,
+        url,
+        like,
+        comment,
+        rePost,
+        share,
         createdAt: new Date(),
       });
 

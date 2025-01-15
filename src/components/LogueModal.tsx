@@ -53,12 +53,12 @@ const LogueModal: React.FC<ModalProps> = ({ active }) => {
         };
         /* eslint-disable @typescript-eslint/no-explicit-any */
     return (
-        <div className='w-[200vw] absolute h-svh'>
+        <div className='w-[200vw] absolute z-40 h-svh'>
 
 
             {active ? (
-                <article className='background-1 rounded-xl w-[520px] h-[313px] absolute top-[25%] right-[18%] flex flex-col gap-4 items-center justify-center p-4'>
-                    <header className='flex flex-col justify-center items-center gap-2'>
+                <article className='background-1 z-[9999] rounded-xl w-[520px] h-[313px] absolute top-[25%] right-[18%] flex flex-col gap-4 items-center justify-center p-4'>
+                    <header className='flex flex-col justify-center z-[9999999] items-center gap-2'>
                         <h1 className=' text-white text-3xl font-bold'>
                             Di más con Threads
                         </h1>

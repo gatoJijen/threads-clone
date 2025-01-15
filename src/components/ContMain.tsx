@@ -1,6 +1,12 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import Search from './Search';
 import Perfil from './Perfil';
+import Post from './Post';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { db } from '@/firebase/config';
+import Image from 'next/image';
+import PostS from './PostS';
 
 interface ContMainProps {
   activeT: boolean;
@@ -14,12 +20,45 @@ interface ContMainProps {
   webP: boolean;
   webST: boolean;
 }
+type Message = {
+  url: string;
+  displayName: string;
+  contenido: string;
+  like: number;
+  comment: number;
+  rePost: number;
+  share: number;
+};
 
 const ContMain: React.FC<ContMainProps> = ({ activeH, activeP, web, activeS, activeST, activeT, webH, webP, webS, webST }) => {
+
+  const [messages, setMessages] = useState<Message[]>([]);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      collection(db, "post"), // Cambia "messages" por el nombre de tu colección
+      (snapshot) => {
+        const updatedMessages = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+        })) as Message[];
+        setMessages(updatedMessages);
+      }
+    );
+
+    // Limpieza al desmontar el componente
+    return () => unsubscribe();
+  }, []);
   return (
-    <section className='flex flex-col items-center rounded-3xl background-3 w-[640px] border border-white border-opacity-10 h-full'>
+    <section className='flex flex-col items-center overflow-y-auto overflow-x-hidden rounded-t-3xl background-3 w-[640px] border border-white border-opacity-10 h-[102%]'>
       {web ? (
-        <h1 className='absolute opacity-0 hidden'></h1>
+        <section>
+          <Post />
+          {messages.map((message) => (
+          <article>
+            <PostS url={message.url} contenido={message.contenido} displayName={message.displayName} like={message.like} image='' comment={message.comment} rePost={message.rePost} share={message.share}/>
+          </article>
+        ))}
+        </section>
       ) : (
         <h1 className='absolute opacity-0 hidden'></h1>
       )}
@@ -34,7 +73,7 @@ const ContMain: React.FC<ContMainProps> = ({ activeH, activeP, web, activeS, act
         <h1 className='absolute opacity-0 hidden'></h1>
       )}
       {webP ? (
-        <Perfil/>
+        <Perfil />
       ) : (
         <h1 className='absolute opacity-0 hidden'></h1>
       )}
@@ -44,7 +83,13 @@ const ContMain: React.FC<ContMainProps> = ({ activeH, activeP, web, activeS, act
         <h1 className='absolute opacity-0 hidden'></h1>
       )}
       {activeT ? (
-        <h1 className='absolute opacity-0 hidden'></h1>
+        <section className='w-full mt-3'>
+          {messages.map((message) => (
+          <article>
+            <PostS url={message.url} contenido={message.contenido} displayName={message.displayName} like={message.like} image='' comment={message.comment} rePost={message.rePost} share={message.share}/>
+          </article>
+        ))}
+        </section>
       ) : (
         <h1 className='absolute opacity-0 hidden'></h1>
       )}
@@ -59,7 +104,7 @@ const ContMain: React.FC<ContMainProps> = ({ activeH, activeP, web, activeS, act
         <h1 className='absolute opacity-0 hidden'></h1>
       )}
       {activeP ? (
-        <Perfil/>
+        <Perfil />
       ) : (
         <h1 className='absolute opacity-0 hidden'></h1>
       )}

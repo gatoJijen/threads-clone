@@ -9,12 +9,12 @@ interface SocialProps {
     activeC: boolean;
     activeR: boolean;
     activeS: boolean;
-    cantidad: string
+    cantidad: number
 }
 
 const Social:React.FC<SocialProps> = ({activeC, activeH, activeR, activeS, cantidad}) => {
     return (
-        <aside className='flex items-center justify-center gap-2 bg-white bg-opacity-0 hover:cursor-pointer px-3 py-2 rounded-full transition-1 hover:bg-opacity-5 z-0'>
+        <aside className='flex items-center justify-center gap-2 bg-white bg-opacity-0 hover:cursor-pointer px-3 py-2 rounded-full transition-1 hover:bg-opacity-5'>
             <button>
                 {activeH?(
                     <HeartPost/>
