@@ -5,7 +5,6 @@ import Perfil from './Perfil';
 import Post from './Post';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '@/firebase/config';
-import Image from 'next/image';
 import PostS from './PostS';
 
 interface ContMainProps {
@@ -21,6 +20,7 @@ interface ContMainProps {
   webST: boolean;
 }
 type Message = {
+  id: string;
   url: string;
   displayName: string;
   contenido: string;
@@ -39,6 +39,7 @@ const ContMain: React.FC<ContMainProps> = ({ activeH, activeP, web, activeS, act
       collection(db, "post"), // Cambia "messages" por el nombre de tu colección
       (snapshot) => {
         const updatedMessages = snapshot.docs.map((doc) => ({
+          id: doc.id
           ...doc.data(),
         })) as Message[];
         setMessages(updatedMessages);
@@ -54,7 +55,7 @@ const ContMain: React.FC<ContMainProps> = ({ activeH, activeP, web, activeS, act
         <section>
           <Post />
           {messages.map((message) => (
-          <article>
+          <article key={message.id}>
             <PostS url={message.url} contenido={message.contenido} displayName={message.displayName} like={message.like} image='' comment={message.comment} rePost={message.rePost} share={message.share}/>
           </article>
         ))}
@@ -85,7 +86,7 @@ const ContMain: React.FC<ContMainProps> = ({ activeH, activeP, web, activeS, act
       {activeT ? (
         <section className='w-full mt-3'>
           {messages.map((message) => (
-          <article>
+          <article key={message.id}>
             <PostS url={message.url} contenido={message.contenido} displayName={message.displayName} like={message.like} image='' comment={message.comment} rePost={message.rePost} share={message.share}/>
           </article>
         ))}

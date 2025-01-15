@@ -1,8 +1,5 @@
 "use client"
-import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import Social from './Social'
-import OptionsPost from '@/app/public/OptionsPost'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '@/firebase/config'
 import Image from 'next/image'

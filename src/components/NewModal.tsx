@@ -18,11 +18,12 @@ const NewModal: React.FC<NewModalProps> = ({ close, p1 }) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [user, setUser] = useState<any>(null);
     const [displayName, setDisplayName] = useState("");
-    let url = user?.photoURL ? user.photoURL : "https://www.instagram.com/static/images/text_app/profile_picture/profile_pic.png/72f3228a91ee.png"
-    let like = 0
-    let comment = 0
-    let rePost = 0
-    let share = 0
+    const url = user?.photoURL ? user.photoURL : "https://www.instagram.com/static/images/text_app/profile_picture/profile_pic.png/72f3228a91ee.png"
+    const like = 0
+    const comment = 0
+    const rePost = 0
+    const share = 0
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
@@ -53,7 +54,7 @@ const NewModal: React.FC<NewModalProps> = ({ close, p1 }) => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ displayName, contenido, url, rePost, comment, like, share }),
+                body: JSON.stringify({ displayName, contenido, url, rePost, comment, like, share}),
             });
 
             if (response.ok) {
