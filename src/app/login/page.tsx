@@ -5,19 +5,79 @@ import React, { useEffect, useState } from 'react';
 import ContinuarL from '../public/ContinuarL';
 import FooterAll from '@/components/FooterAll';
 import { auth, provider } from '@/firebase/config';
-import { onAuthStateChanged, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 
 const Page: React.FC = () => {
-    /* eslint-disable @typescript-eslint/no-explicit-any */
-   
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [user, setUser] = useState<any>(null);
+    const [displayName, setDisplayName] = useState<string>("");
+    const [url, setUrl] = useState<string>("https://www.instagram.com/static/images/text_app/profile_picture/profile_pic.png/72f3228a91ee.png");
+    const [email, setEmail] = useState<string>("");
+    const [contraseña, setContraseña] = useState<string>("");
+    const [error, setError] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false);
     const router = useRouter();
-    const [email, setEmail] = useState("");
-    const [contraseña, setContraseña] = useState("");
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false); // Estado para manejar la carga
 
-    // Función para hacer peticiones POST de forma genérica
+    const handlePostRequest2 = async () => {
+        try {
+            // Aquí guardamos displayName y url (la foto del perfil) en la base de datos
+            const response = await fetch("/api/router/Users", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ displayName, url }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Mensaje guardado:", data);
+            } else {
+                console.error("Error en la API:", await response.json());
+            }
+        } catch (error) {
+            console.error("Error de red:", error);
+        }
+    };
+
+    const googleRegister = async () => {
+        try {
+            const provider = new GoogleAuthProvider();
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+
+            if (!user) {
+                throw new Error("No se pudo obtener el usuario.");
+            }
+
+            setUser(user);
+            setDisplayName(user.displayName || "x2356");
+            setUrl(user.photoURL || "https://www.instagram.com/static/images/text_app/profile_picture/profile_pic.png/72f3228a91ee.png");
+
+            // Obtener el token de usuario
+            const token = await user.getIdToken();
+            if (!token) {
+                throw new Error("No se pudo obtener el token de autenticación.");
+            }
+
+            // Guardar el token en el localStorage
+            localStorage.setItem("authToken", token);
+            localStorage.setItem("userEmail", user.email || "");
+
+            
+            if (user) {
+                await handlePostRequest2(); // Llamamos a la función para guardar datos en la base de datos
+                router.push("/web"); // Redirigimos al usuario después de un inicio de sesión exitoso
+            } else {
+                throw new Error( "Error desconocido al procesar la respuesta del backend.");
+            }
+        } catch (error: any) {
+            console.error("Error al iniciar sesión con Google:", error.message);
+            setError(error.message || "Error desconocido");
+        }
+    };
+
     const handlePostRequest = async (url: string, data: object) => {
         try {
             const response = await fetch(url, {
@@ -39,94 +99,46 @@ const Page: React.FC = () => {
             throw error; // Lanza el error para que se maneje en el nivel superior
         }
     };
-
-    // Función para registrar un usuario
     const register = async () => {
         try {
             if (email === "" || contraseña === "") {
                 throw new Error("Ambos campos deben estar completos.");
             }
 
-            // Verificar si el usuario ya está registrado
             const existingUser = await handlePostRequest("/api/router/login", { email, contraseña })
-                .then(() => true) // Si se inicia sesión correctamente, el usuario ya existe
-                .catch(() => false); // Si falla, es porque el usuario no está registrado
+                .then(() => true)
+                .catch(() => false);
 
             if (existingUser) {
                 console.log("Usuario ya registrado, realizando login...");
-                await login(); // Si el usuario ya existe, hacer login
+                await login();
+                await handlePostRequest2(); // Llamamos a la función después de login
             } else {
                 console.log("Registrando nuevo usuario...");
-                await handlePostRequest("/api/router/register", { email, contraseña }); // Registra el nuevo usuario
-                router.push("/web"); // Redirige después de registrar
+                await handlePostRequest("/api/router/register", { email, contraseña });
+                await handlePostRequest2(); // Llamamos a la función después de registro
+                router.push("/web");
             }
         } catch (err: any) {
             console.error("Error al registrar o iniciar sesión:", err.message);
-            setError(err.message); // Establece el error si ocurre
+            setError(err.message);
         }
     };
 
-    // Función para iniciar sesión
     const login = async () => {
         try {
             const userCredential = await handlePostRequest("/api/router/login", { email, contraseña });
-
-            // Obtén el usuario y el token de la respuesta
             const { user, token } = userCredential;
 
-            console.log("Inicio de sesión exitoso:", user);
-
-            // Guarda el token y el email en el localStorage
             localStorage.setItem("authToken", token);
             localStorage.setItem("userEmail", user.email || "");
 
-            // Redirige a la página principal
             router.push("/web");
         } catch (err: any) {
             console.error("Error al iniciar sesión:", err.message);
-            setError(err.message); // Establece el error si ocurre
+            setError(err.message);
         }
     };
-
-    // Función para manejar login con Google
-    const googleRegister = async () => {
-        try {
-            const result = await signInWithPopup(auth, provider);
-            const user = result.user;
-
-            if (!user) {
-                throw new Error("No se pudo obtener el usuario.");
-            }
-
-            const token = await user.getIdToken();
-
-            // Enviar el token a la API para el backend
-            const res = await fetch("/api/auth/google", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ token }),
-            });
-
-            const data = await res.json();
-
-            if (data.success) {
-                // Guarda el token y otros datos en el localStorage
-                localStorage.setItem("authToken", data.token);
-                localStorage.setItem("userEmail", data.email);
-
-                // Redirige al usuario a la página principal
-                router.push("/web");
-            } else {    
-                throw new Error(data.error || "Error desconocido");
-            }
-        } catch (error: any) {
-            console.error("Error al iniciar sesión con Google:", error.message || error);
-        }
-    };
-
-    // Maneja el envío del formulario
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(""); // Limpiar errores
@@ -139,16 +151,17 @@ const Page: React.FC = () => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-                // Usuario autenticado
+                setUser(user);
+                setDisplayName(user.displayName || "");
+                setUrl(user.photoURL || "https://www.instagram.com/static/images/text_app/profile_picture/profile_pic.png/72f3228a91ee.png");
+                handlePostRequest2(); // Llamamos a la función cada vez que se actualiza el usuario
                 router.push("/web");
             } else {
-                // Usuario no autenticado
                 router.push("/login");
             }
         });
 
-        // Limpia el listener al desmontar
-        return () => unsubscribe();
+        return () => unsubscribe(); // Limpia el listener cuando el componente se desmonta
     }, [router]);
     /* eslint-disable @typescript-eslint/no-explicit-any */
     return (
