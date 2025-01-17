@@ -7,6 +7,7 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import PostS from './PostS';
 import UserS from './UserS';
+import { User } from 'firebase/auth';
 
 interface ContMainProps {
   activeT: boolean;
@@ -32,7 +33,7 @@ type Message = {
 };
 type Users = {
   id: string;
-  url: string;
+  photoURL: string;
   displayName: string;
 };
 
@@ -86,7 +87,7 @@ const ContMain: React.FC<ContMainProps> = ({ activeH, activeP, web, activeS, act
           <Search />
           {users.map((users) => (
             <article key={users.id}>
-              <UserS url={users.url} user={users.displayName}/>
+              <UserS url={users.photoURL} user={users.displayName}/>
             </article>
           ))}
         </section>
