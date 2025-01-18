@@ -1,3 +1,4 @@
+"use client"
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import NavBar from '@/components/NavBar';
