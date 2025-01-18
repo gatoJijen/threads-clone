@@ -44,7 +44,7 @@ export default function Web() {
       clearTimeout(timer);
       unsubscribe();
     };
-  }, [router]); // El efecto solo depende de router
+  }); // El efecto solo depende de router
   return (
     <section>
       {isLoading ? (

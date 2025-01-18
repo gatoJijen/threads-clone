@@ -69,7 +69,7 @@ const ContMain: React.FC<ContMainProps> = ({ activeH, activeP, web, activeS, act
     return () => { unsubscribe(); unsubscribe2() }
   }, []);
   return (
-    <section className='flex flex-col items-center overflow-y-auto overflow-x-hidden rounded-t-3xl background-3 w-[640px] border border-white border-opacity-10 h-[102%]'>
+    <section className='flex flex-col items-center overflow-y-auto overflow-x-hidden rounded-t-3xl background-3 w-[640px] border border-white border-opacity-10 h-[536px]'>
       {web ? (
         <section>
           <Post />
@@ -87,7 +87,7 @@ const ContMain: React.FC<ContMainProps> = ({ activeH, activeP, web, activeS, act
           <Search />
           {users.map((users) => (
             <article key={users.id}>
-              <UserS url={users.photoURL} user={users.displayName}/>
+              <UserS url={users.photoURL} user={users.displayName} id={users.id}/>
             </article>
           ))}
         </section>

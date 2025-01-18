@@ -1,10 +1,11 @@
 
-import { auth } from '@/firebase/config';
+import { auth, db } from '@/firebase/config';
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
 import { onAuthStateChanged, updateProfile } from 'firebase/auth';
 import Borradores from '@/app/public/Borradores';
 import NewPostOption from '@/app/public/NewPostOption';
+import { addDoc, collection } from 'firebase/firestore';
 
 interface NewModalProps {
     close: () => void;
@@ -24,51 +25,46 @@ const NewModal: React.FC<NewModalProps> = ({ close, p1 }) => {
     const rePost = 0
     const share = 0
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-            setDisplayName(currentUser?.displayName || "");
-        });
+   const add = async () => {
+       // Add a new document with a generated id.
+       const docRef = await addDoc(collection(db, "post"), {
+           url: url,
+           displayName: displayName,
+           contenido: contenido,
+           like: like,
+           comment: comment,
+           rePost: rePost,
+           share: share,
+       });
+       console.log("Document written with ID: ", docRef.id);
+   }
+   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
-        return () => unsubscribe();
-    }, []);
+   useEffect(() => {
+       const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+           setUser(currentUser);
+           setDisplayName(currentUser.displayName.replace(/\s+/g, ''));
+       });
 
-    const handleUpdateDisplayName = async () => {
-        if (user) {
-            try {
-                await updateProfile(user, { displayName });
-                alert("Nombre actualizado correctamente");
-                // Refrescar el usuario
-                setUser({ ...user, displayName });
-            } catch (error) {
-                console.error("Error al actualizar el nombre", error);
-                alert("Hubo un error al actualizar el nombre.");
-            }
-        }
-    };
+       return () => unsubscribe();
+   }, []);
 
-    const handlePostRequest = async () => {
-        try {
-            const response = await fetch("/api/router/Spost", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ displayName, contenido, url, rePost, comment, like, share}),
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log("Mensaje guardado:", data);
-            } else {
-                console.error("Error en la API:", await response.json());
-            }
-        } catch (error) {
-            console.error("Error de red:", error);
-        }
-    };
+   const handleUpdateDisplayName = async () => {
+       if (user) {
+           try {
+               await updateProfile(user, { displayName });
+               alert("Nombre actualizado correctamente");
+               // Refrescar el usuario
+               setUser({ ...user, displayName });
+           } catch (error) {
+               console.error("Error al actualizar el nombre", error);
+               alert("Hubo un error al actualizar el nombre.");
+           }
+       }
+   };
+    
     return (
-        <article className={`background-3 rounded-xl absolute top-[30%]  ${p1 ? "right-[31.5vw]" : "right[100vw]"}  flex flex-col items-start justify-between  gap-2 h-[226px] w-[620px] border border-white border-opacity-20 z-50`}>
+        <article className={`background-3 rounded-xl absolute top-[30%]  ${p1 ? "right-[26.5vw]" : "right[100vw]"}  flex flex-col items-start justify-between  gap-2 h-[226px] w-[620px] border border-white border-opacity-20 z-[99999]`}>
             <nav className='flex justify-between w-full border-b h-[56px] px-6 py-4 items-center border-b-white border-opacity-20'>
                 <button onClick={close}>
                     <p>Cancelar</p>
@@ -149,8 +145,9 @@ const NewModal: React.FC<NewModalProps> = ({ close, p1 }) => {
 
                 {contenido.length >= 1 && displayName.length >= 1 ? (
                     <section>
-                        <button onClick={() => { //add();
-                            handlePostRequest(); close()
+                        <button onClick={() => { add();
+                            //handlePostRequest();
+                             close()
                         }} className='rounded-xl border border-white text-white text-opacity-85 w-20 h-10 bg-transparent font-semibold border-opacity-60 flex justify-center items-center fs-1'>
                             Publicar
                         </button>

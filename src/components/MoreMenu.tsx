@@ -28,7 +28,7 @@ const MoreMenu: React.FC<MoreMenuProps> = ({ active, login }) => {
     };
     return (
         
-        <div className={`absolute z-[99999] ${login? 'top-[-255px] ':'top-[-100px]'}  left-[10px]`}>
+        <div className={`z-[99] absolute ${login? 'top-[-255px] ':'top-[-100px]'}  left-[10px]`}>
             {active ? (<section className='background-3 border py-2 border-white border-opacity-10 justify-center items-start  rounded-2xl flex flex-col w-[240px] '>
                 <article className='border-b flex flex-col gap-1 justify-center items-center border-b-white p-2 fs-1 border-opacity-10 w-full'>
                     <button className='text-white bg-white flex justify-between items-center pr-2 px-2 bg-opacity-0 hover:bg-opacity-10 w-full h-[48px] rounded-xl text-start font-bold text-opacity-90'><p>Aspecto</p><picture className="rotate-180"><AspectMenu/></picture></button>

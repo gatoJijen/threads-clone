@@ -48,30 +48,32 @@ const SideBar: React.FC<SideProps> = ({ login, activeT, activeS, activeH, active
     };
     
     return (
-        <section className="flex flex-col items-center fixed justify-between bg-transparent h-svh w-[76px]">
-            {abrir ? (<section onClick={change} className='flex absolute bg-transparent z-[40] justify-center items-center w-[200vw] h-svh'>
+        <>
+        {abrir ? (<section onClick={change} className='flex absolute bg-transparent justify-center items-center w-[100vw] h-svh'>
                 
-            </section>) : (<MoreMenu login={login} active={abrir} />)
-
-            }
-            {abrir2 ? (
-                <section className="w-[200vw] absolute h-svh">
-                    <section onClick={change2} className='bg-black flex z-[999999999999] justify-center items-center bg-opacity-80 w-full h-svh'>
-                        <LogueModal active={abrir2} />
+                </section>) : (<MoreMenu login={login} active={abrir} />)
+    
+                }
+                {abrir2 ? (
+                    <section className="w-[100vw] absolute h-svh">
+                        <section onClick={change2} className='bg-black flex z-[999] justify-center items-center bg-opacity-80 w-full h-svh'>
+                            <LogueModal active={abrir2} />
+                        </section>
                     </section>
-                </section>
-            ) : (<div className="hidden absolute opacity-0"></div>)
-
-            }
-            {abrir3 ? (
-                <section className="w-[200vw] absolute h-svh">
-                    <section className='bg-black flex z-[999999999999] justify-center items-center bg-opacity-80 w-full h-svh'>
-                        <NewModal p1={true} close={change3}/>
+                ) : (<div className="hidden absolute opacity-0"></div>)
+    
+                }
+                {abrir3 ? (
+                    <section className="w-[100vw] absolute h-svh">
+                        <section className='bg-black flex z-[999] justify-center items-center bg-opacity-80 w-full h-svh'>
+                            <NewModal p1={true} close={change3}/>
+                        </section>
                     </section>
-                </section>
-            ) : (<div className="hidden absolute opacity-0"></div>)
-
-            }
+                ) : (<div className="hidden absolute opacity-0"></div>)
+    
+                }
+        <section className="flex flex-col items-center fixed justify-between bg-transparent h-svh w-[76px]">
+            
             
             <section></section>
             <section className="flex flex-col w-full gap-4 mt-[68px] p-2">
@@ -194,6 +196,7 @@ const SideBar: React.FC<SideProps> = ({ login, activeT, activeS, activeH, active
                 </section>
             </footer>
         </section >
+        </>
     )
 }
 

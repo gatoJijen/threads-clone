@@ -12,22 +12,22 @@ import { doc, setDoc } from 'firebase/firestore';
 const Page: React.FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [user, setUser] = useState<any>(null);
-    const [displayName, setDisplayName] = useState<string>("");
-    const [url, setUrl] = useState<string>("https://www.instagram.com/static/images/text_app/profile_picture/profile_pic.png/72f3228a91ee.png");
-
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
     const router = useRouter();
+    const seguidores = ['']
 
-    const saveUserToFirestore = async (uid: string, displayName: string, photoURL: string) => {
+    const saveUserToFirestore = async (uid: string, displayName: string, photoURL: string, seguidores: string[]) => {
         try {
             const userRef = doc(db, "users", uid); // Crea un documento con el UID del usuario
             await setDoc(userRef, {
                 displayName,
                 photoURL,
+                uid,
                 email,
+                seguidores,
             });
             console.log("Usuario guardado en Firestore");
         } catch (err) {
@@ -42,7 +42,7 @@ const Page: React.FC = () => {
             const user = userCredential.user;
 
             // Actualiza el perfil del usuario en Firebase Authentication
-            const defaultDisplayName = email.split("@")[0]; // Nombre por defecto si no se proporciona uno
+            const defaultDisplayName = email.split("@")[0].replace(' ', ''); 
             const defaultPhotoURL = user.photoURL || "https://www.instagram.com/static/images/text_app/profile_picture/profile_pic.png/72f3228a91ee.png";
             
             await updateProfile(user, {
@@ -51,7 +51,7 @@ const Page: React.FC = () => {
             });
 
             // Guarda el usuario en Firestore
-            await saveUserToFirestore(user.uid, defaultDisplayName, defaultPhotoURL);
+            await saveUserToFirestore(user.uid, defaultDisplayName, defaultPhotoURL, seguidores);
 
             router.push("/web");
         } catch (err: any) {
@@ -81,13 +81,12 @@ const Page: React.FC = () => {
             const user = result.user;
 
             if (!user) throw new Error("No se pudo obtener el usuario.");
-
             // Usa los datos del usuario proporcionados por Google
-            const displayName = user.displayName || "Usuario Google";
+            const displayName = user.displayName.replace(/\s+/g, '')|| "UsuarioG";
             const photoURL = user.photoURL || "https://www.instagram.com/static/images/text_app/profile_picture/profile_pic.png/72f3228a91ee.png";
 
             // Guarda el usuario en Firestore
-            await saveUserToFirestore(user.uid, displayName, photoURL);
+            await saveUserToFirestore(user.uid, displayName, photoURL, seguidores);
 
             router.push("/web");
         } catch (err: any) {
