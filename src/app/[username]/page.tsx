@@ -3,7 +3,6 @@ import { db } from '@/firebase/config';
 import NavBar from '@/components/NavBar';
 import SideBar from '@/components/SideBar';
 import PerfilS from '@/components/PerfilS';
-import { PageProps } from '.next/types/app/[username]/page';
 
 // Tipo para los datos de usuario
 interface User {
@@ -36,16 +35,11 @@ async function getUserData(username: string): Promise<User | null> {
     return null;
   }
 }
-interface PageProps {
-  params: {
-    username: string
-  }
-}
 
-// Página para mostrar los datos del usuario
-const  UserPage= async ({ params }: PageProps)=> {
-
+// Componente de la página
+const UserPage = async ({ params }: { params: { username: string } }) => {
   const user = await getUserData(params.username);
+
   if (!user) {
     return <div>Usuario no encontrado</div>;
   }
@@ -53,18 +47,28 @@ const  UserPage= async ({ params }: PageProps)=> {
   return (
     <section className="overflow-hidden">
       <header>
-      <NavBar login={true} title={user.displayName} />
-
+        <NavBar login={true} title={user.displayName} />
       </header>
-      <SideBar web={false} login={true} webS={false} webH={false} webP={false} webST={false} activeS={false} activeH={false} activeP={false} activeT={false} activeST={false} />
+      <SideBar
+        web={false}
+        login={true}
+        webS={false}
+        webH={false}
+        webP={false}
+        webST={false}
+        activeS={false}
+        activeH={false}
+        activeP={false}
+        activeT={false}
+        activeST={false}
+      />
       <article className="w-full background-2 h-[80%] mt-[118px] ml-[355px] overflow-hidden">
-        <section className='flex flex-col items-center overflow-y-auto overflow-x-hidden rounded-t-3xl background-3 w-[640px] border border-white border-opacity-10 h-[536px]'>
-
+        <section className="flex flex-col items-center overflow-y-auto overflow-x-hidden rounded-t-3xl background-3 w-[640px] border border-white border-opacity-10 h-[536px]">
           <PerfilS displayName={user.displayName} url={user.photoURL} id={user.id} />
         </section>
       </article>
-
     </section>
   );
-}
-export default UserPage
+};
+
+export default UserPage;
