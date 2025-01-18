@@ -35,9 +35,13 @@ async function getUserData(username: string): Promise<User | null> {
     return null;
   }
 }
-
+interface PageProps {
+  params: {
+    username: string;
+  };
+}
 // Página para mostrar los datos del usuario
-export default async function UserPage({ params }: { params: { username: string } }) {
+const  UserPage:React.FC<PageProps> =async({ params })=> {
   const user = await getUserData(params.username);
 
   if (!user) {
@@ -61,3 +65,4 @@ export default async function UserPage({ params }: { params: { username: string 
     </section>
   );
 }
+export default UserPage
