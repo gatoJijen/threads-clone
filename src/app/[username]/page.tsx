@@ -1,4 +1,4 @@
-import { collection, query, where, getDocs, limit } from 'firebase/firestore';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import NavBar from '@/components/NavBar';
 import SideBar from '@/components/SideBar';

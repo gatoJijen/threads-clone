@@ -1,6 +1,6 @@
 import { auth, db } from '@/firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
-import { arrayUnion, collection, doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
+import { arrayUnion, collection, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
@@ -13,7 +13,10 @@ interface UserSProps {
 
 
 const UserS: React.FC<UserSProps> = ({ url, user }) => {
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    /* eslint-disable @typescript-eslint/no-unused-vars*/
     const [isFollowing, setIsFollowing] = useState(false); // Estado que indica si ya estamos siguiendo a este usuario
+
     const [userFT, setUserFT] = useState(false)
     const [tu, setTu] = useState(false)
     useEffect(() => {
@@ -34,7 +37,7 @@ const UserS: React.FC<UserSProps> = ({ url, user }) => {
 
                 if (userData.seguidores && userData.seguidores.includes(userF.uid)) {
                     setIsFollowing(true); // Si ya estamos siguiendo, actualizamos el estado
-                }else if(userData.uid == userF.uid){
+                } else if (userData.uid == userF.uid) {
                     setTu(true)
                 }
             }
@@ -75,9 +78,10 @@ const UserS: React.FC<UserSProps> = ({ url, user }) => {
     };
     const [userF, setUserF] = useState<any>(null)
 
-
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    /* eslint-disable @typescript-eslint/no-unused-vars*/
     return (
-        <section className={`w-full flex justify-between items-center border-b ${tu? "opacity-0 hidden absolute": ""} border-white border-opacity-10`}>
+        <section className={`w-full flex justify-between items-center border-b ${tu ? "opacity-0 hidden absolute" : ""} border-white border-opacity-10`}>
             <article className='flex items-center justify-start gap-1'>
                 <Link href={`/${user}`}>
                     <button className='w-[84px] h-[84px] flex justify-center items-center'>
@@ -91,17 +95,17 @@ const UserS: React.FC<UserSProps> = ({ url, user }) => {
             </article>
             <article>
                 {isFollowing ? (
-                    <button className = 'text-white opacity-60 cursor-default bg-transparent text-center font-bold border border-white rounded-lg px-4 py-1 border-opacity-20'>
-                    <p>Siguiendo</p>
-        </button>
-                ): (
-                    <button onClick = { () => { addFollower() } } className = 'text-white bg-transparent text-center font-bold border border-white rounded-lg px-4 py-1 border-opacity-20'>
-                    <p>Seguir</p>
-        </button>
-    )
+                    <button className='text-white opacity-60 cursor-default bg-transparent text-center font-bold border border-white rounded-lg px-4 py-1 border-opacity-20'>
+                        <p>Siguiendo</p>
+                    </button>
+                ) : (
+                    <button onClick={() => { addFollower() }} className='text-white bg-transparent text-center font-bold border border-white rounded-lg px-4 py-1 border-opacity-20'>
+                        <p>Seguir</p>
+                    </button>
+                )
 
-}
-                
+                }
+
             </article >
         </section >
     )

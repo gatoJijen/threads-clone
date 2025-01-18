@@ -7,7 +7,6 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import PostS from './PostS';
 import UserS from './UserS';
-import { User } from 'firebase/auth';
 
 interface ContMainProps {
   activeT: boolean;

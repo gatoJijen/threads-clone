@@ -1,7 +1,6 @@
 
 import Image from 'next/image';
 import React from 'react'
-import PerfilComplet from './PerfilComplet';
 
 interface PerfilSProps {
     displayName: string;

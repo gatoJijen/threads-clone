@@ -4,13 +4,14 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import ContinuarL from '../public/ContinuarL';
 import FooterAll from '@/components/FooterAll';
-import { auth, db, provider } from '@/firebase/config';
+import { auth, db } from '@/firebase/config';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { doc, setDoc } from 'firebase/firestore';
 
 const Page: React.FC = () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    /* eslint-disable @typescript-eslint/no-unused-vars*/
     const [user, setUser] = useState<any>(null);
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -120,6 +121,7 @@ const Page: React.FC = () => {
 
         return () => unsubscribe(); // Limpia el listener cuando el componente se desmonta
     }, [router]);
+    /* eslint-disable @typescript-eslint/no-unused-vars*/
     /* eslint-disable @typescript-eslint/no-explicit-any */
     return (
         <section className='z-[99] background-1 absolute w-full h-full'>

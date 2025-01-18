@@ -5,7 +5,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-const page = () => {
+const Page = () => {
     const router = useRouter()
     useEffect(() => {
         // Primero, comprueba si ya existe un token de autenticación en localStorage
@@ -47,4 +47,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
