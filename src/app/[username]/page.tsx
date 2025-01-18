@@ -4,7 +4,11 @@ import NavBar from '@/components/NavBar';
 import SideBar from '@/components/SideBar';
 import PerfilS from '@/components/PerfilS';
 
-// Tipo para los datos de usuario
+interface PageProps {
+  params: {
+    username: string;
+  };
+}// Tipo para los datos de usuario
 interface User {
   id: string;
   photoURL: string;
@@ -36,7 +40,7 @@ async function getUserData(username: string): Promise<User | null> {
 }
 
 // Componente de la página
-const UserPage = async ({ params }: { params: Record<string, string> }) => {
+const UserPage = async ({ params }: PageProps) => {
   const user = await getUserData(params.username);
 
   if (!user) {
