@@ -41,9 +41,10 @@ interface PageProps {
   };
 }
 // Página para mostrar los datos del usuario
-const  UserPage:React.FC<PageProps> =async({ params })=> {
-  const user = await getUserData(params.username);
+const  UserPage:React.FC<PageProps> = async ({ params })=> {
 
+  const { username } = params
+  const user = await getUserData(username);
   if (!user) {
     return <div>Usuario no encontrado</div>;
   }
