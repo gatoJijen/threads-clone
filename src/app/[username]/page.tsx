@@ -3,6 +3,7 @@ import { db } from '@/firebase/config';
 import NavBar from '@/components/NavBar';
 import SideBar from '@/components/SideBar';
 import PerfilS from '@/components/PerfilS';
+import { PageProps } from '.next/types/app/[username]/page';
 
 // Tipo para los datos de usuario
 interface User {
@@ -37,14 +38,14 @@ async function getUserData(username: string): Promise<User | null> {
 }
 interface PageProps {
   params: {
-    username: string;
-  };
+    username: string
+  }
 }
-// Página para mostrar los datos del usuario
-const  UserPage:React.FC<PageProps> = async ({ params })=> {
 
-  const { username } = params
-  const user = await getUserData(username);
+// Página para mostrar los datos del usuario
+const  UserPage= async ({ params }: PageProps)=> {
+
+  const user = await getUserData(params.username);
   if (!user) {
     return <div>Usuario no encontrado</div>;
   }
