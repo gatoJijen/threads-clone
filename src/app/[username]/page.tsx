@@ -10,7 +10,11 @@ interface User {
   photoURL: string;
   displayName: string;
 }
-
+interface PageProps {
+  params: {
+    username: string;
+  };
+}
 // Función para obtener datos del usuario desde Firebase
 async function getUserData(username: string): Promise<User | null> {
   try {
@@ -37,7 +41,7 @@ async function getUserData(username: string): Promise<User | null> {
 }
 
 // Componente de la página
-const UserPage = async ({ params }: { params: { username: string } }) => {
+const UserPage = async ({ params }: { params: Record<string, string> }) => {
   const user = await getUserData(params.username);
 
   if (!user) {
