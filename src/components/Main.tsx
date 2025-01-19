@@ -19,7 +19,7 @@ interface MainProps {
 const Main:React.FC<MainProps> =({activeT,web, activeS,login, activeH,webH, activeP, activeST, webP, webS, webST})=>{
     return(
         <>  
-            <header>
+            <header className="mediaMain">
                 {activeT?(
                     <NavBar login={login} title="Inicio"/>
                 ):(
@@ -73,7 +73,7 @@ const Main:React.FC<MainProps> =({activeT,web, activeS,login, activeH,webH, acti
             </header>
             <section className="flex w-full h-full items-center gap-8 justify-between">
                 <SideBar web={web} login={login} webS={webS} webH={webH} webP={webP} webST={webST} activeS={activeS} activeH={activeH} activeP={activeP} activeT={activeT} activeST={activeST}/>
-                <article className="w-full background-2 h-[80%] mt-[118px] ml-[355px] overflow-hidden">
+                <article className="w-full background-2 h-[80%] mediaArtContMain mt-[19.6svh] ml-[26%] overflow-hidden">
                     <ContMain web={web} webS={webS} webH={webH} webP={webP} webST={webST} activeS={activeS} activeH={activeH} activeP={activeP} activeT={activeT} activeST={activeST}/>
                 </article>
             </section>

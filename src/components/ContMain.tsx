@@ -68,7 +68,7 @@ const ContMain: React.FC<ContMainProps> = ({ activeH, activeP, web, activeS, act
     return () => { unsubscribe(); unsubscribe2() }
   }, []);
   return (
-    <section className='flex flex-col items-center overflow-y-auto overflow-x-hidden rounded-t-3xl background-3 w-[640px] border border-white border-opacity-10 h-[536px]'>
+    <section className='flex mediaContMain flex-col items-center overflow-y-auto overflow-x-hidden rounded-t-3xl background-3 w-[46.8vw] min-w-[500px] border border-white border-opacity-10 h-[80svh]'>
       {web ? (
         <section>
           <Post />

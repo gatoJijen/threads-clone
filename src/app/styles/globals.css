@@ -17,6 +17,92 @@
   }
 }
 
+
+@media (width<=700px) {
+  .mediaNav {
+    flex-direction: column!important;
+    justify-content: center!important;
+    align-items: center!important;
+    gap: 0px !important;
+    padding: 0px!important;
+    top:15px
+  }
+  .mediaLogoNav{
+    margin: 0px !important;
+  }
+  .mediaMoreNav{
+    display: flex!important;
+    opacity: 100%!important;
+  }
+  .mediaTitleNav {
+    opacity: 0%!important;
+    margin: 0px!important;
+    display: none!important;
+  }
+  .mediaLogueNav {
+    margin: 0px!important;
+    background-color: transparent!important;
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.250)!important;
+    width: 90%;
+    border-radius: 12px!important;
+  }
+  .mediaSubNav {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+  }
+
+
+  .mediaMain {
+    position: relative;
+  }
+
+  .mediaSide {
+    z-index: 10;
+    height: 72px;
+    backdrop-filter: blur(20px);
+    width: 100vw!important;
+    position: fixed!important;
+    bottom: 0svh!important;
+    padding-bottom: 50px!important;
+    gap: 0px!important;
+    flex-direction: row;
+  }
+  .mediaSectionSide {
+    
+    
+    display: none;
+    opacity: 0%;
+  }
+  .mediaContButtonSide{
+    flex-direction: row;
+    width: 100%;
+    height: 76px;
+    padding-bottom: 40px!important;
+    gap: 20px!important;
+  }
+  .mediaButtonSide {
+    height: 40px;
+    width: 20%;
+  }
+  .mediaMoreSide {
+    display: none!important;
+    opacity: 0%!important;
+  }
+
+  .mediaArtContMain {
+    height: 100svh!important;
+    margin: 0px!important;
+  }
+  .mediaContMain {
+    margin-top: 20svh;
+    background-color: transparent!important;
+    border-radius: 0px!important;
+    width: 100vw;
+  }
+}
+
 body {
   color: var(--foreground);
   background: var(--background-2);
