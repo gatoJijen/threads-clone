@@ -5,59 +5,58 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
 interface ModalProps {
-    active: boolean
+    active: boolean;
 }
 
 const LogueModal: React.FC<ModalProps> = ({ active }) => {
     const router = useRouter();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [error, setError] = useState("");
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [loading, setLoading] = useState(false); // Estado para manejar la carga
     /* eslint-disable @typescript-eslint/no-explicit-any */
     const googleRegister = async () => {
-            try {
-                const result = await signInWithPopup(auth, provider);
-                const user = result.user;
-    
-                if (!user) {
-                    throw new Error("No se pudo obtener el usuario.");
-                }
-    
-                const token = await user.getIdToken();
-    
-                // Enviar el token a la API para el backend
-                const res = await fetch("/api/auth/google", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ token }),
-                });
-    
-                const data = await res.json();
-    
-                if (data.success) {
-                    // Guarda el token y otros datos en el localStorage
-                    localStorage.setItem("authToken", data.token);
-                    localStorage.setItem("userEmail", data.email);
-    
-                    // Redirige al usuario a la página principal
-                    router.push("/web");
-                } else {    
-                    throw new Error(data.error || "Error desconocido");
-                }
-            } catch (error: any) {
-                console.error("Error al iniciar sesión con Google:", error.message || error);
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+
+            if (!user) {
+                throw new Error("No se pudo obtener el usuario.");
             }
-        };
-        /* eslint-disable @typescript-eslint/no-explicit-any */
+
+            const token = await user.getIdToken();
+
+            // Enviar el token a la API para el backend
+            const res = await fetch("/api/auth/google", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ token }),
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                // Guarda el token y otros datos en el localStorage
+                localStorage.setItem("authToken", data.token);
+                localStorage.setItem("userEmail", data.email);
+
+                // Redirige al usuario a la página principal
+                router.push("/web");
+            } else {
+                throw new Error(data.error || "Error desconocido");
+            }
+        } catch (error: any) {
+            console.error("Error al iniciar sesión con Google:", error.message || error);
+        }
+    };
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     return (
-        <div className='w-[100vw] absolute z-40 h-svh'>
+        <section className='w-[100vw] absolute z-40 h-svh'>
 
 
             {active ? (
-                <article className='background-1 z-[9999] rounded-xl w-[520px] h-[313px] absolute top-[25%] right-[30.5vw] flex flex-col gap-4 items-center justify-center p-4'>
+
+                <article className='background-1 z-[9999] rounded-xl w-[520px] h-[313px] mediaLogueModal absolute top-[25%] right-[30.5vw] flex flex-col gap-4 items-center justify-center p-4'>
                     <header className='flex flex-col justify-center z-[9999999] items-center gap-2'>
                         <h1 className=' text-white text-3xl font-bold'>
                             Di más con Threads
@@ -78,7 +77,7 @@ const LogueModal: React.FC<ModalProps> = ({ active }) => {
                 </article>) : ("")
 
             }
-        </div>
+        </section>
     )
 }
 

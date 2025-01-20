@@ -65,8 +65,8 @@ const SideBar: React.FC<SideProps> = ({ login, activeT, activeS, activeH, active
 
             }
             {abrir3 ? (
-                <section className="w-[100vw] absolute h-svh">
-                    <section className='bg-black flex z-[999] justify-center items-center bg-opacity-80 w-full h-svh'>
+                <section className="w-[100vw] mediaSSectionModal absolute h-svh">
+                    <section className='bg-black flex z-[999] mediaSectionModal justify-center items-center bg-opacity-80 w-full h-svh'>
                         <NewModal p1={true} close={change3} />
                     </section>
                 </section>

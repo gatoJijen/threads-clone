@@ -64,7 +64,7 @@ const NewModal: React.FC<NewModalProps> = ({ close, p1 }) => {
    };
     
     return (
-        <article className={`background-3 rounded-xl absolute top-[30%]  ${p1 ? "right-[26.5vw]" : "right[100vw]"}  flex flex-col items-start justify-between  gap-2 h-[226px] w-[620px] border border-white border-opacity-20 z-[99999]`}>
+        <article className={`background-3 rounded-xl absolute mediaNewModal top-[30%]  ${p1 ? "right-[26.5vw]" : "right[100vw]"}  flex flex-col items-start justify-between  gap-2 h-[226px] w-[620px] border border-white border-opacity-20 z-[99999]`}>
             <nav className='flex justify-between w-full border-b h-[56px] px-6 py-4 items-center border-b-white border-opacity-20'>
                 <button onClick={close}>
                     <p>Cancelar</p>
@@ -77,7 +77,7 @@ const NewModal: React.FC<NewModalProps> = ({ close, p1 }) => {
                     <button><NewPostOption /></button>
                 </section>
             </nav>
-            <section className='flex w-full gap-2 px-6'>
+            <section className='flex w-full  gap-2 px-6'>
                 <section className='rounded-full mt-[8px] w-[44px] h-10 bg-transparent'>
                     {user?.photoURL ? (
                         <Image
@@ -100,7 +100,7 @@ const NewModal: React.FC<NewModalProps> = ({ close, p1 }) => {
                     }
 
                 </section>
-                <section className='flex justify-between w-full pr-5'>
+                <section className='flex justify-between  w-full pr-5'>
                     <aside className='w-full'>
                         <header>
 
@@ -141,20 +141,20 @@ const NewModal: React.FC<NewModalProps> = ({ close, p1 }) => {
                 </section>
             </section>
 
-            <footer className='flex mb-3 justify-end ml-20 w-10/12 gap-2'>
+            <footer className='flex mb-3 justify-end  ml-20 w-10/12 gap-2'>
 
                 {contenido.length >= 1 && displayName.length >= 1 ? (
                     <section>
                         <button onClick={() => { add();
                             //handlePostRequest();
                              close()
-                        }} className='rounded-xl border border-white text-white text-opacity-85 w-20 h-10 bg-transparent font-semibold border-opacity-60 flex justify-center items-center fs-1'>
+                        }} className='rounded-xl mediaButtonNewModal border border-white text-white text-opacity-85 w-20 h-10 bg-transparent font-semibold border-opacity-60 flex justify-center items-center fs-1'>
                             Publicar
                         </button>
                     </section>
                 ) : (
                     <section>
-                        <button className='cursor-not-allowed rounded-xl border border-white text-white text-opacity-85 opacity-40 w-20 h-10 bg-transparent font-semibold border-opacity-60 flex justify-center items-center fs-1'>
+                        <button className=' mediaButtonNewModal cursor-not-allowed rounded-xl border border-white text-white text-opacity-85 opacity-40 w-20 h-10 bg-transparent font-semibold border-opacity-60 flex justify-center items-center fs-1'>
                             Publicar
                         </button>
 
