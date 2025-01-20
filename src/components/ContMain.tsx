@@ -29,6 +29,7 @@ type Message = {
   comment: number;
   rePost: number;
   share: number;
+  uid: string;
 };
 type Users = {
   id: string;
@@ -74,7 +75,7 @@ const ContMain: React.FC<ContMainProps> = ({ activeH, activeP, web, activeS, act
           <Post />
           {messages.map((message) => (
             <article key={message.id}>
-              <PostS url={message.url} contenido={message.contenido} displayName={message.displayName} like={message.like} image='' comment={message.comment} rePost={message.rePost} share={message.share} />
+              <PostS url={message.url} uid={message.uid} contenido={message.contenido} displayName={message.displayName} like={message.like} image='' comment={message.comment} rePost={message.rePost} share={message.share} />
             </article>
           ))}
         </section>
@@ -113,7 +114,7 @@ const ContMain: React.FC<ContMainProps> = ({ activeH, activeP, web, activeS, act
         <section className='w-full mt-3'>
           {messages.map((message) => (
             <article key={message.id}>
-              <PostS url={message.url} contenido={message.contenido} displayName={message.displayName} like={message.like} image='' comment={message.comment} rePost={message.rePost} share={message.share} />
+              <PostS url={message.url} uid={message.uid} contenido={message.contenido} displayName={message.displayName} like={message.like} image='' comment={message.comment} rePost={message.rePost} share={message.share} />
             </article>
           ))}
         </section>

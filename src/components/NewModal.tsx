@@ -35,6 +35,7 @@ const NewModal: React.FC<NewModalProps> = ({ close, p1 }) => {
            comment: comment,
            rePost: rePost,
            share: share,
+           uid: user.uid,
        });
        console.log("Document written with ID: ", docRef.id);
    }

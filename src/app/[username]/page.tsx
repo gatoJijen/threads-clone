@@ -13,10 +13,10 @@ interface User {
   displayName: string;
 }
 // Función para obtener datos del usuario desde Firebase
-async function getUserData(username: string): Promise<User | null> {
+async function getUserData(uid: string): Promise<User | null> {
   try {
     const usersRef = collection(db, 'users');
-    const q = query(usersRef, where('displayName', '==', username));
+    const q = query(usersRef, where('uid', '==', uid));
     const querySnapshot = await getDocs(q);
     if (querySnapshot.empty) {
       return null; // Usuario no encontrado
