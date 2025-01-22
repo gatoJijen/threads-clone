@@ -9,7 +9,7 @@ import More2 from '../public/More2';
 // Tipo para los datos de usuario
 interface PageProps {
   params: {
-    username: string;
+    username: string[];
   };
 }
 interface User {
@@ -40,7 +40,7 @@ async function getUserData(uid: string): Promise<User | null> {
 }
 // Página para mostrar los datos del usuario
 export default async function UserPage({ params }:  PageProps) {
-  const user = await getUserData(params.username);
+  const user = await getUserData(params.username.join(''));
   const abrir =false
   const login = true
   if (!user) {
