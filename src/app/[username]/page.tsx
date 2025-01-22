@@ -6,10 +6,10 @@ import PerfilS from '@/components/PerfilS';
 import Link from 'next/link';
 import MoreMenu from '@/components/MoreMenu';
 import More2 from '../public/More2';
-// Tipo para los datos de usuario
+
 interface PageProps {
   params: {
-    username: string; // Asegúrate de que sea un string
+    username: string;
   };
 }
 interface User {
@@ -40,8 +40,9 @@ async function getUserData(uid: string): Promise<User | null> {
     return null;
   }
 }
+
 // Página para mostrar los datos del usuario
-export default async function UserPage({ params }: PageProps) {
+export default async function UserPage({ params }: {params: {username:string}}) {
 
   const user = await getUserData(params.username); // Usa directamente params.username
 
