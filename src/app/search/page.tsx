@@ -1,6 +1,5 @@
 "use client"
 import ContMain from "@/components/ContMain";
-import Main from "@/components/Main";
 import MoreMenu from "@/components/MoreMenu";
 import SideBar from "@/components/SideBar";
 import { auth } from "@/firebase/config";
