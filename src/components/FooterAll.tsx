@@ -3,7 +3,7 @@ import LinkF from './LinkF'
 
 const FooterAll = () => {
     return (
-        <ul className='flex gap-4 text-xs opacity-45'>
+        <ul className='flex gap-4 text-xs opacity-45 mediaFAll'>
             <li>© 2025</li>
             <li className='hover:underline transition-all'><LinkF title="Condiciones de Threads" url="/" /></li>
             <li className='hover:underline transition-all'><LinkF title="Politíca de privacidad" url="/" /></li>

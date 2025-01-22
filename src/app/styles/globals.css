@@ -79,6 +79,10 @@
     position: absolute;
     left: 48vw;
   }
+  .mediaNavU2 {
+    top: 3svh!important;
+    left: 42.8vw!important;
+  }
   .mediaLogoNav{
     margin: 0px !important;
   }
@@ -225,6 +229,14 @@
     right: 0px!important;
     height: 400px!important;
     width: 100vw;
+  }
+  .mediaFAll {
+    opacity: 0%!important;
+    display: none;
+    position: absolute;
+  }
+  .mediaImageLogin {
+    top: -40px;
   }
 }
 
