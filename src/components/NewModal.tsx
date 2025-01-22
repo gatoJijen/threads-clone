@@ -20,10 +20,10 @@ const NewModal: React.FC<NewModalProps> = ({ close, p1 }) => {
     const [user, setUser] = useState<any>(null);
     const [displayName, setDisplayName] = useState("");
     const url = user?.photoURL ? user.photoURL : "https://www.instagram.com/static/images/text_app/profile_picture/profile_pic.png/72f3228a91ee.png"
-    const like = 0
-    const comment = 0
-    const rePost = 0
-    const share = 0
+    const like = []
+    const comment = []
+    const rePost = []
+    const share = []
 
    const add = async () => {
        // Add a new document with a generated id.
