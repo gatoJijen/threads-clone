@@ -9,11 +9,11 @@ import More2 from '../public/More2';
 
 
 
-interface User {
-  id: string;
-  photoURL: string;
-  displayName: string;
-}
+//interface User {
+//  id: string;
+//  photoURL: string;
+//  displayName: string;
+//}
 
 
 // Función para obtener datos del usuario desde Firebase
