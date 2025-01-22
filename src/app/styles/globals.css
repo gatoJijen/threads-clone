@@ -80,8 +80,18 @@
     left: 48vw;
   }
   .mediaNavU2 {
-    top: 3svh!important;
+    background-color: transparent!important;
+    z-index: 10;
+    align-items: center !important;
+    justify-content: center!important;
+    backdrop-filter: blur(20px);
+    gap: 0px !important;
+    padding: 0px!important;
+    top:15px;
     left: 42.8vw!important;
+  }
+  .mediaLogoNavU2{
+    margin-right: 20px!important;
   }
   .mediaLogoNav{
     margin: 0px !important;

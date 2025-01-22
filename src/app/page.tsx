@@ -71,7 +71,7 @@ export default function Home() {
             }
             <nav className="flex justify-between mediaNavU2 fixed px-4 items-center bg-transparent w-full py-4 h-14">
                 
-                    <Link className="mt-[15px] hover:scale-[1.07] transition-all mediaLogoNav ml-[5px]" href={"/"}>
+                    <Link className="mt-[15px] hover:scale-[1.07] transition-all mediaLogoNavU2 ml-[5px]" href={"/"}>
                         <picture>
                             <button>
                                 <svg aria-label="Threads" fill="white" height="34" role="img" viewBox="0 0 192 192" width="34" xmlns="http://www.w3.org/2000/svg">
