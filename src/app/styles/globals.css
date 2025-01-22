@@ -20,7 +20,7 @@
 @media (width<=580px) {
 
   .mediaPostInput {
-    width: 220px;
+    width: 280px;
   }
 }
 
@@ -46,7 +46,7 @@
     padding: 0px!important;
   }
   .mediaPostInput {
-    width: 200%!important;
+    width: 320px!important;
   }
   .mediaButtonNewModal{
     width: 90px!important;
