@@ -37,7 +37,7 @@ const EditPerfilModal: React.FC<EditPerfilModalProps> = ({ close }) => {
     };
 
     return (
-        <article className="background-2 rounded-xl p-2 absolute top-[5%] right-[30vw] z-[9999999999] flex flex-col items-start justify-between gap-2 h-[600px] w-[518px] border border-white border-opacity-20">
+        <article className="background-2 rounded-xl mediaEditModal p-2 absolute top-[5%] right-[30vw] z-[9999999999] flex flex-col items-start justify-between gap-2 h-[600px] w-[518px] border border-white border-opacity-20">
             <header className="flex w-full gap-2 px-6">
                 <section className="flex justify-between w-full">
                     <aside className="w-full">

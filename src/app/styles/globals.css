@@ -229,6 +229,12 @@
     bottom: 44svh;
     left: 5svh;
   }
+  .mediaEditModal {
+    top: 14svh!important;
+    right: 0px!important;
+    height: 400px!important;
+    width: 100vw;
+  }
 }
 
 body {
