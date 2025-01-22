@@ -37,7 +37,7 @@ export default function Web() {
     // Simula un retraso en la carga para este ejemplo
     const timer = setTimeout(() => {
       setIsLoading(false); // Cambia el estado de carga después de 2 segundos
-    }, 2000);
+    }, 1000);
 
     // Limpia el temporizador y el listener cuando el componente se desmonte
     return () => {

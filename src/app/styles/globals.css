@@ -17,7 +17,7 @@
   }
 }
 
-@media (width<=400px) {
+@media (width<=500px) {
   .mediaNav {
     right: 10vw;
   }
