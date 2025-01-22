@@ -17,7 +17,7 @@ interface User {
 
 
 // Función para obtener datos del usuario desde Firebase
-async function getUserData(uid: string): Promise<User | null> {
+async function getUserData(uid: string){
   try {
     const usersRef = collection(db, 'users');
     const q = query(usersRef, where('uid', '==', uid));
