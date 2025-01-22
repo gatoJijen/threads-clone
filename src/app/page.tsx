@@ -1,14 +1,12 @@
 "use client"
 import ContMain from "@/components/ContMain";
 import LoadingMain from "@/components/LoadingMain";
-import Main from "@/components/Main";
 import SideBar from "@/components/SideBar";
 import { auth } from "@/firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import More2 from "./public/More2";
 import MoreMenu from "@/components/MoreMenu";
 export default function Home() {
   const router = useRouter();
