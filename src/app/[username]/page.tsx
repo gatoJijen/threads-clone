@@ -7,11 +7,8 @@ import Link from 'next/link';
 import MoreMenu from '@/components/MoreMenu';
 import More2 from '../public/More2';
 
-interface PageProps {
-  params: {
-    username: string;
-  };
-}
+
+
 interface User {
   id: string;
   photoURL: string;
