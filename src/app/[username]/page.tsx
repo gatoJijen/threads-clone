@@ -9,7 +9,7 @@ import More2 from '../public/More2';
 // Tipo para los datos de usuario
 interface PageProps {
   params: {
-    username: string[]; // Asegúrate de que sea un string
+    username: string; // Asegúrate de que sea un string
   };
 }
 interface User {
@@ -20,7 +20,7 @@ interface User {
 
 
 // Función para obtener datos del usuario desde Firebase
-async function getUserData(uid: string[]): Promise<User | null> {
+async function getUserData(uid: string): Promise<User | null> {
   try {
     const usersRef = collection(db, 'users');
     const q = query(usersRef, where('uid', '==', uid));
@@ -43,7 +43,8 @@ async function getUserData(uid: string[]): Promise<User | null> {
 // Página para mostrar los datos del usuario
 export default async function UserPage({ params }: PageProps) {
 
-  const user = await getUserData(params.username);
+  const user = await getUserData(params.username); // Usa directamente params.username
+
 
   if (!user) {
     return <div>Usuario no encontrado</div>;
