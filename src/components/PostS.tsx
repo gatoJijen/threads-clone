@@ -1,7 +1,6 @@
 import React from 'react'
 import Social from './Social';
 import Image from 'next/image';
-import Link from 'next/link';
 
 interface PostSProps {
     url: string;
@@ -15,21 +14,17 @@ interface PostSProps {
     share: number;
 }
 
-const PostS: React.FC<PostSProps> = ({url, displayName, contenido, image, like, comment, rePost, share,uid}) => {
+const PostS: React.FC<PostSProps> = ({url, displayName, contenido, image, like, comment, rePost, share}) => {
     return (
         <article className={`bg-transparent pt-2 flex flex-col items-start justify-between  gap-2  w-full border-b border-white border-opacity-20`}>
             <section className='flex w-full gap-2 px-6'>
-                <Link href={`/${uid}`}>
                 <section className='rounded-full mt-[8px] w-[44px] h-10 bg-transparent'>
                     <Image className='rounded-full' src={url} alt='user photo' width={1000} height={1000}/>
                 </section>
-                </Link>
                 
                 <section className='flex justify-between w-full pr-5'>
                     <aside className='w-full'>
-                        <Link href={`/${uid}`}>
                             <h1 className='hover:underline'>{displayName}</h1>
-                        </Link>
                         <article className='w-full'>
                             <p>{contenido}</p>
                             {image.length >= 1  ? (
