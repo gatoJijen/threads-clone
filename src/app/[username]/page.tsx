@@ -17,6 +17,8 @@ interface User {
   photoURL: string;
   displayName: string;
 }
+
+
 // Función para obtener datos del usuario desde Firebase
 async function getUserData(uid: string): Promise<User | null> {
   try {
@@ -39,20 +41,22 @@ async function getUserData(uid: string): Promise<User | null> {
   }
 }
 // Página para mostrar los datos del usuario
-export default async function UserPage(props:PageProps) {
-  const { username } = props.params;
-  const user = await getUserData(username);
-  const abrir =false
-  const login = true
+export default async function UserPage({ params }: Awaited<PageProps>) {
+
+  const user = await getUserData(params.username);
+
   if (!user) {
     return <div>Usuario no encontrado</div>;
-  } 
+  }
+
+  const abrir = false;
+  const login = true;
 
   return (
     <section className="overflow-hidden">
       <header>
         <article className="relative">
-          
+
           <nav className="flex justify-between mediaNavU fixed px-4 items-center bg-transparent w-full py-4 h-14">
             {login ? (
               <article className="mediaArticleNav">
