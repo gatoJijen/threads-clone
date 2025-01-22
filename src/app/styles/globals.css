@@ -17,27 +17,8 @@
   }
 }
 
-@media (width<=550px) {
-  .mediaNav {
-    right: 10vw;
-  }
-  .mediaArticleNav{
-    gap: 140px!important;
-  }
-  .mediaLogoNav {
-    padding-left: 40px!important;
-  }
+@media (width<=580px) {
 
-  .mediaPost {
-    padding: 0px 20px!important;
-    width: 100%!important;
-  }
-  .mediaPostUser {
-    margin-top: 20px!important;
-  }
-  .mediaPostQue {
-    padding: 0px!important;
-  }
   .mediaPostInput {
     width: 220px;
   }
@@ -65,7 +46,7 @@
     padding: 0px!important;
   }
   .mediaPostInput {
-    width: 320px;
+    width: 200%!important;
   }
   .mediaButtonNewModal{
     width: 90px!important;
