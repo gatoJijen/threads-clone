@@ -3,7 +3,7 @@ import React from 'react'
 
 const Search = () => {
   return (
-    <article className='flex items-center background-2 h-[45px] px-6 py-2 w-[590px] mt-[24px] border border-white border-opacity-20  rounded-2xl gap-[10px]'>
+    <article className='flex items-center background-2 h-[45px] px-6 py-2 w-[90vw] mt-[24px] border border-white border-opacity-20  rounded-2xl gap-[10px]'>
         <button>
           <SearchInput/>
         </button>

@@ -17,6 +17,32 @@
   }
 }
 
+@media (width<=400px) {
+  .mediaNav {
+    right: 10vw;
+  }
+  .mediaArticleNav{
+    gap: 140px!important;
+  }
+  .mediaLogoNav {
+    padding-left: 40px!important;
+  }
+
+  .mediaPost {
+    padding: 0px 20px!important;
+    width: 100%!important;
+  }
+  .mediaPostUser {
+    margin-top: 20px!important;
+  }
+  .mediaPostQue {
+    padding: 0px!important;
+  }
+  .mediaPostInput {
+    width: 220px;
+  }
+}
+
 @media (width<=600px) {
   .mediaNav {
     right: 10vw;
