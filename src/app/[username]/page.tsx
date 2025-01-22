@@ -39,8 +39,8 @@ async function getUserData(uid: string): Promise<User | null> {
   }
 }
 // Página para mostrar los datos del usuario
-export default async function UserPage({ params }:  PageProps) {
-  const { username } = params;
+export default async function UserPage(props:PageProps) {
+  const { username } = props.params;
   const user = await getUserData(username);
   const abrir =false
   const login = true
