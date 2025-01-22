@@ -127,7 +127,7 @@ const Page: React.FC = () => {
         <section className='z-[99] background-1 absolute w-full h-full'>
             <header className='absolute h-full w-full z-[99]'>
                 <nav className='w-full relative h-full overflow-hidden cursor-default'>
-                    <picture className='absolute top-[-145px] w-full scale-[130%] pointer-events-none'>
+                    <picture className='absolute top-[-145px] w-[100vw] scale-[130%] pointer-events-none'>
                         <Image priority src="https://static.cdninstagram.com/rsrc.php/yD/r/eIJhnL1FtGH.webp" alt='' width={2000} height={2000} />
                     </picture>
                 </nav>
