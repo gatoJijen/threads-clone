@@ -2,7 +2,6 @@ import { auth, db } from '@/firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { arrayUnion, collection, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import Image from 'next/image';
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
 interface UserSProps {
@@ -12,7 +11,7 @@ interface UserSProps {
 }
 
 
-const UserS: React.FC<UserSProps> = ({ url, user, id }) => {
+const UserS: React.FC<UserSProps> = ({ url, user }) => {
     /* eslint-disable @typescript-eslint/no-explicit-any */
     /* eslint-disable @typescript-eslint/no-unused-vars*/
     const [isFollowing, setIsFollowing] = useState(false); // Estado que indica si ya estamos siguiendo a este usuario
@@ -83,15 +82,12 @@ const UserS: React.FC<UserSProps> = ({ url, user, id }) => {
     return (
         <section className={`w-full flex justify-between items-center border-b ${tu ? "opacity-0 hidden absolute" : ""} border-white border-opacity-10`}>
             <article className='flex items-center justify-start gap-1'>
-                <Link href={`/${id}`}>
+                
                     <button className='w-[84px] h-[84px] flex justify-center items-center'>
                         <Image className='rounded-full w-[40px] h-[40px]' src={url} alt='user foto' width={100} height={100} />
                     </button>
-                </Link>
-                <Link href={`/${id}`}>
 
                     <h1 className='text-xl text-white font-semibold'>{user}</h1>
-                </Link>
             </article>
             <article>
                 {isFollowing ? (
