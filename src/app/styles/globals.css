@@ -19,8 +19,8 @@
 
 @media (width<=580px) {
 
-  .mediaPostInput {
-    width: 200px;
+  .mediaSearchInput {
+    width: 90vw;
   }
 }
 
@@ -58,6 +58,9 @@
     margin-right: 10px!important;
     margin-top: 75svh!important;
   }
+  .mediaSearchInput {
+    width: 90vw;
+  }
 }
 
 @media (width<=700px) {
@@ -89,6 +92,9 @@
     padding: 0px!important;
     top:15px;
     left: 42.8vw!important;
+  }
+  .mediaSearchInput {
+    width: 90vw;
   }
   .mediaLogoNavU2{
     margin-right: 20px!important;
