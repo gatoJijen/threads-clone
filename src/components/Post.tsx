@@ -25,7 +25,7 @@ const Post = () => {
     return (
 
 
-        <article className='bg-transparent border-b pl-6 pt-3 pb-2 border-b-white flex flex-col items-start justify-start gap-2 w-full border-opacity-20 h-20'>
+        <article className='bg-transparent border-b pl-6 pt-3 pb-2 border-b-white flex flex-col items-start justify-start gap-2 w-vw mediaPost border-opacity-20 h-20'>
             {abrir3 ? (
                 <section className="w-[99vw] absolute top-0 right-[0vw] h-[100svh]">
                     <section className='bg-black flex z-[999999999999] justify-center items-center bg-opacity-80 w-full h-[110svh]'>
@@ -35,8 +35,8 @@ const Post = () => {
             ) : (<div className="hidden absolute opacity-0"></div>)
 
             }
-            <section className='flex h-full w-full gap-4'>
-                <article className='rounded-full mt-[8px] w-10 h-1'>
+            <section className='flex h-full mediaPostSection w-full gap-4'>
+                <article className='rounded-full mediaPostUser mt-[8px] w-10 h-1'>
                     <picture className='w-[90px] h-[84px]'>
                         {user?.photoURL ? (
                             <Image
@@ -59,9 +59,9 @@ const Post = () => {
                         }
                     </picture>
                 </article>
-                <section className='flex items-center h-full  w-full pr-5'>
+                <section className='flex items-center h-full mediaPostQue w-full pr-5'>
                     <aside className='flex items-center justify-center'>
-                        <p onClick={change3} className='h-10 w-[450px] text-start hover:cursor-text bg-transparent text-white fs-1 mt-4 text-opacity-40' >¿Qué hay de nuevo?</p>
+                        <p onClick={change3} className='h-10 w-[450px] mediaPostInput text-start hover:cursor-text bg-transparent text-white fs-1 mt-4 text-opacity-40' >¿Qué hay de nuevo?</p>
                     </aside>
                     <button onClick={change3} className='bg-transparent text-center font-bold border border-white rounded-lg px-3 py-1 border-opacity-20'>
                         Publicar
