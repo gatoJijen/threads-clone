@@ -3,16 +3,19 @@
 @tailwind utilities;
 
 :root {
-  --background: rgb(16,16,16);
+  --background-1: rgb(16, 16, 16);
+  --background-2: rgb(10, 10, 10);
+  --background-3: rgb(24, 24, 24);
+  --background-4: rgb(30, 30, 30);
   --foreground: #ededed;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background-1: rgb(16,16,16);
-    --background-2: rgb(10,10,10);
-    --background-3: rgb(24,24,24);
-    --background-4: rgb(30,30,30);
+    --background-1: rgb(16, 16, 16);
+    --background-2: rgb(10, 10, 10);
+    --background-3: rgb(24, 24, 24);
+    --background-4: rgb(30, 30, 30);
     --foreground: #ededed;
   }
 }
@@ -28,36 +31,43 @@
   .mediaNav {
     right: 10vw;
   }
-  .mediaArticleNav{
-    gap: 140px!important;
+
+  .mediaArticleNav {
+    gap: 140px !important;
   }
+
   .mediaLogoNav {
-    padding-left: 40px!important;
+    padding-left: 40px !important;
   }
 
   .mediaPost {
-    padding: 0px 20px!important;
-    width: 100%!important;
+    padding: 0px 20px !important;
+    width: 100% !important;
   }
+
   .mediaPostUser {
-    margin-top: 20px!important;
+    margin-top: 20px !important;
   }
+
   .mediaPostQue {
-    padding: 0px!important;
+    padding: 0px !important;
   }
+
   .mediaPostInput {
-    width: 60vw!important;
+    width: 60vw !important;
   }
-  .mediaButtonNewModal{
-    width: 90px!important;
-    height: 40px!important;
-    padding: 0px 40px!important;
-    background-color:white!important;
+
+  .mediaButtonNewModal {
+    width: 90px !important;
+    height: 40px !important;
+    padding: 0px 40px !important;
+    background-color: white !important;
     color: black;
-    border-radius: 20px!important;
-    margin-right: 10px!important;
-    margin-top: 75svh!important;
+    border-radius: 20px !important;
+    margin-right: 10px !important;
+    margin-top: 75svh !important;
   }
+
   .mediaSearchInput {
     width: 90vw;
   }
@@ -65,56 +75,65 @@
 
 @media (width<=700px) {
   .mediaNav {
-    background-color: transparent!important;
+    background-color: transparent !important;
     z-index: 10;
     align-items: center !important;
-    justify-content: center!important;
+    justify-content: center !important;
     backdrop-filter: blur(20px);
     gap: 0px !important;
-    padding: 0px!important;
-    top:15px;
+    padding: 0px !important;
+    top: 15px;
   }
+
   .mediaArticleNav {
-    background-color: transparent!important;
+    background-color: transparent !important;
     display: flex;
     gap: 230px;
     align-items: center;
     position: absolute;
     left: 48vw;
   }
+
   .mediaNavU2 {
-    background-color: transparent!important;
+    background-color: transparent !important;
     z-index: 10;
     align-items: center !important;
-    justify-content: center!important;
+    justify-content: center !important;
     backdrop-filter: blur(20px);
     gap: 0px !important;
-    padding: 0px!important;
-    top:15px;
-    left: 42.8vw!important;
+    padding: 0px !important;
+    top: 15px;
+    left: 42.8vw !important;
   }
+
   .mediaSearchInput {
     width: 90vw;
   }
-  .mediaLogoNavU2{
-    margin-right: 20px!important;
+
+  .mediaLogoNavU2 {
+    margin-right: 20px !important;
   }
-  .mediaLogoNav{
+
+  .mediaLogoNav {
     margin: 0px !important;
   }
-  .mediaMoreNav{
-    display: flex!important;
-    opacity: 100%!important;
+
+  .mediaMoreNav {
+    display: flex !important;
+    opacity: 100% !important;
   }
+
   .mediaTitleNav {
-    opacity: 0%!important;
-    margin: 0px!important;
-    display: none!important;
+    opacity: 0% !important;
+    margin: 0px !important;
+    display: none !important;
   }
+
   .mediaLogueNav {
-    margin: 0px!important;
-    margin-right: 120px!important;
+    margin: 0px !important;
+    margin-right: 120px !important;
   }
+
   .mediaSubNav {
     width: 100%;
     justify-content: center;
@@ -130,81 +149,92 @@
     z-index: 10;
     height: 72px;
     backdrop-filter: blur(20px);
-    width: 100vw!important;
-    position: fixed!important;
-    bottom: 0svh!important;
-    padding-bottom: 50px!important;
-    gap: 0px!important;
+    width: 100vw !important;
+    position: fixed !important;
+    bottom: 0svh !important;
+    padding-bottom: 50px !important;
+    gap: 0px !important;
     flex-direction: row;
   }
-  .mediaSSectionModal{
+
+  .mediaSSectionModal {
     width: 100vw;
     background-color: transparent;
   }
-  .mediaSectionModal{
+
+  .mediaSectionModal {
     background-color: transparent;
   }
-  .mediaNewModal{
+
+  .mediaNewModal {
     top: 0;
     left: 0;
     width: 99vw;
     height: 100svh;
     justify-content: start;
   }
-  .mediaButtonNewModal{
-    width: 90px!important;
-    height: 40px!important;
-    padding: 0px 40px!important;
-    background-color:white!important;
+
+  .mediaButtonNewModal {
+    width: 90px !important;
+    height: 40px !important;
+    padding: 0px 40px !important;
+    background-color: white !important;
     color: black;
-    border-radius: 20px!important;
-    margin-right: 10px!important;
-    margin-top: 65svh!important;
+    border-radius: 20px !important;
+    margin-right: 10px !important;
+    margin-top: 65svh !important;
   }
+
   .mediaSectionSide {
-    
-    
+
+
     display: none;
     opacity: 0%;
   }
-  .mediaContButtonSide{
+
+  .mediaContButtonSide {
     flex-direction: row;
     width: 100%;
     height: 76px;
-    padding-bottom: 40px!important;
-    gap: 20px!important;
+    padding-bottom: 40px !important;
+    gap: 20px !important;
   }
+
   .mediaButtonSide {
     height: 40px;
     width: 20%;
   }
-  
-  .mediaIconSide{
+
+  .mediaIconSide {
     width: 28px !important;
     height: 28px !important;
   }
-  .mediaIconSide2{
+
+  .mediaIconSide2 {
     width: 34px !important;
     height: 34px !important;
   }
+
   .mediaMoreSide {
-    display: none!important;
-    opacity: 0%!important;
+    display: none !important;
+    opacity: 0% !important;
   }
 
   .mediaArtContMain {
-    height: 100svh!important;
-    margin: 0px!important;
-    margin-bottom: 40px!important;
+    height: 100svh !important;
+    margin: 0px !important;
+    margin-bottom: 40px !important;
   }
+
   .mediaContMain {
     margin-top: 20svh;
-    background-color: transparent!important;
-    border-radius: 0px!important;
+    background-color: transparent !important;
+    border-radius: 0px !important;
     min-width: 100vw;
     width: 100vw;
   }
-  .mediaNavU{
+
+  .mediaNavU {
     display: flex;
     align-items: center;
     padding-top: 40px;
@@ -212,23 +242,27 @@
     top: 0px;
     right: 0px;
   }
+
   .mediaMoreMenu {
     margin-left: -200px;
   }
-  .mediaLoginMoreMenu{
-    top: 40px!important;
+
+  .mediaLoginMoreMenu {
+    top: 40px !important;
   }
+
   .mediaLogueModal {
-    width: 100vw!important;
+    width: 100vw !important;
 
     border: 1px solid rgba(255, 255, 255, 0.377);
     height: 280px;
     padding-top: 40px;
-    top: 43.8svh!important;
+    top: 43.8svh !important;
     border-radius: 20px 20px 0px 0px;
-    right: 0px!important;
+    right: 0px !important;
   }
-  .mediaCloseLogueModal{
+
+  .mediaCloseLogueModal {
     opacity: 100% !important;
     border-radius: 50%;
     width: 40px;
@@ -240,17 +274,20 @@
     bottom: 44svh;
     left: 5svh;
   }
+
   .mediaEditModal {
-    top: 14svh!important;
-    right: 0px!important;
-    height: 400px!important;
+    top: 14svh !important;
+    right: 0px !important;
+    height: 400px !important;
     width: 100vw;
   }
+
   .mediaFAll {
-    opacity: 0%!important;
+    opacity: 0% !important;
     display: none;
     position: absolute;
   }
+
   .mediaImageLogin {
     top: -40px;
   }
@@ -264,13 +301,16 @@ body {
 .background-1 {
   background-color: var(--background-1);
 }
-.background-2{
-  background-color: var(--background-2)!important;
+
+.background-2 {
+  background-color: var(--background-2) !important;
 }
-.background-3{
+
+.background-3 {
   background-color: var(--background-3);
 }
-.background-4{
+
+.background-4 {
   background-color: var(--background-4);
 }
 
@@ -280,7 +320,8 @@ body {
   background-size: auto;
   background-repeat: no-repeat;
 }
-.fs-1{
+
+.fs-1 {
   font-size: 15px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -290,11 +331,11 @@ body {
 }
 
 .color-2 {
-  color: rgb(204,204,204)
+  color: rgb(204, 204, 204)
 }
 
 .transition-1 {
-  transition: all 0.20s cubic-bezier(0.48,0.08,1,0.06);
+  transition: all 0.20s cubic-bezier(0.48, 0.08, 1, 0.06);
 }
 
 .stc:hover>svg {
